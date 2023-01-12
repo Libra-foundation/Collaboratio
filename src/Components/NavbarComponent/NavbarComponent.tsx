@@ -15,18 +15,28 @@ import React from "react";
 import FolderIcon from "@mui/icons-material/Folder";
 
 interface NavbarComponentState {
-  is_openMenu: boolean;
-  is_openProfile: boolean;
+  isOpenMenu: boolean;
+  isOpenProfile: boolean;
 }
 
 export default function NavbarComponent(): JSX.Element {
   const [IS_OPENMENU, SetOpenMenu] = React.useState<NavbarComponentState>({
-    is_openMenu: false,
-    is_openProfile: false,
+    isOpenMenu: false,
+    isOpenProfile: false,
   });
 
   const HandleOpenMenu = (): void => {
-    SetOpenMenu();
+    SetOpenMenu({
+      ...IS_OPENMENU,
+      isOpenMenu: !IS_OPENMENU.isOpenMenu,
+    });
+  };
+
+  const HandleOpenProfile = (): void => {
+    SetOpenMenu({
+      ...IS_OPENMENU,
+      isOpenProfile: !IS_OPENMENU.isOpenProfile,
+    });
   };
 
   return (
