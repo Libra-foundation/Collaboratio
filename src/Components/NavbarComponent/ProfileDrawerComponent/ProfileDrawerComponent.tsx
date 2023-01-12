@@ -5,6 +5,7 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
+  ListItemText,
 } from "@mui/material";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
@@ -21,12 +22,12 @@ export default function ProfileDrawerComponent(
   return (
     <Drawer open={isOpen} onClose={close} anchor="right">
       <List>
-        <ListItem>
+        <ListItemButton>
           <ListItemIcon>
             <ManageAccountsIcon />
           </ListItemIcon>
-          <ListItemButton>Account settings</ListItemButton>
-        </ListItem>
+          <ListItemText primary="Account settings" />
+        </ListItemButton>
       </List>
     </Drawer>
   );

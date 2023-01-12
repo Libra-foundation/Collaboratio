@@ -5,8 +5,10 @@ import {
   ListItem,
   ListItemButton,
   ListItemIcon,
+  ListItemText,
 } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
+import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 
 interface MenuDrawerProps {
   isOpen: boolean;
@@ -21,12 +23,12 @@ export default function MenuDrawerComponent(
   return (
     <Drawer open={isOpen} onClose={close}>
       <List>
-        <ListItem>
+        <ListItemButton>
           <ListItemIcon>
             <FolderIcon />
           </ListItemIcon>
-          <ListItemButton>Test</ListItemButton>
-        </ListItem>
+          <ListItemText primary="test" />
+        </ListItemButton>
       </List>
     </Drawer>
   );
