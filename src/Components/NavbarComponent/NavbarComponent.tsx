@@ -1,18 +1,9 @@
-import {
-  AppBar,
-  Container,
-  Drawer,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemIcon,
-  Typography,
-} from "@mui/material";
+import {AppBar, Container, IconButton, Typography} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import React from "react";
-import FolderIcon from "@mui/icons-material/Folder";
+import MenuDrawerComponent from "./MenuDrawerComponent/MenuDrawerComponent";
+import ProfileDrawerComponent from "./ProfileDrawerComponent/ProfileDrawerComponent";
 
 interface NavbarComponentState {
   isOpenMenu: boolean;
@@ -75,20 +66,23 @@ export default function NavbarComponent(): JSX.Element {
         >
           Collaboratio
         </Typography>
-        <IconButton size="large" color="inherit" aria-label="open drawer">
+        <IconButton
+          size="large"
+          color="inherit"
+          aria-label="open drawer"
+          onClick={HandleOpenProfile}
+        >
           <AccountBoxIcon />
         </IconButton>
       </Container>
-      <Drawer open={IS_OPENMENU} onClose={HandleOpenMenu}>
-        <List>
-          <ListItem>
-            <ListItemIcon>
-              <FolderIcon />
-            </ListItemIcon>
-            <ListItemButton>Test</ListItemButton>
-          </ListItem>
-        </List>
-      </Drawer>
+      <MenuDrawerComponent
+        isOpen={IS_OPENMENU.isOpenMenu}
+        close={HandleOpenMenu}
+      />
+      <ProfileDrawerComponent
+        isOpen={IS_OPENMENU.isOpenProfile}
+        close={HandleOpenProfile}
+      />
     </AppBar>
   );
 }
