@@ -2,13 +2,12 @@ import React from "react";
 import {
   Drawer,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import DashboardIcon from "@mui/icons-material/Dashboard";
 
 interface MenuDrawerProps {
   isOpen: boolean;
@@ -20,15 +19,20 @@ export default function MenuDrawerComponent(
 ): JSX.Element {
   const {isOpen, close} = props;
 
+  const SECTIONS = [
+    {sectionName: "Folder", sectionIcon: <FolderIcon />},
+    {sectionName: "Dashboard", sectionIcon: <DashboardIcon />},
+  ];
+
   return (
     <Drawer open={isOpen} onClose={close}>
       <List>
-        <ListItemButton>
-          <ListItemIcon>
-            <FolderIcon />
-          </ListItemIcon>
-          <ListItemText primary="test" />
-        </ListItemButton>
+        {SECTIONS.map((sections) => (
+          <ListItemButton key={sections.sectionName}>
+            <ListItemIcon>{sections.sectionIcon}</ListItemIcon>
+            <ListItemText primary={sections.sectionName} />
+          </ListItemButton>
+        ))}
       </List>
     </Drawer>
   );

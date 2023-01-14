@@ -2,12 +2,13 @@ import React from "react";
 import {
   Drawer,
   List,
-  ListItem,
   ListItemButton,
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
 
 interface ProfileDrawerProps {
   isOpen: boolean;
@@ -19,15 +20,27 @@ export default function ProfileDrawerComponent(
 ): JSX.Element {
   const {isOpen, close} = props;
 
+  const SECTIONS = [
+    {sectionName: "Account settings", sectionIcon: <ManageAccountsIcon />},
+  ];
+
+  const [THEME, setTheme] = React.useState("dark");
+
   return (
     <Drawer open={isOpen} onClose={close} anchor="right">
       <List>
         <ListItemButton>
           <ListItemIcon>
-            <ManageAccountsIcon />
+            <Brightness4Icon />
           </ListItemIcon>
-          <ListItemText primary="Account settings" />
+          <ListItemText primary="Change mode" />
         </ListItemButton>
+        {SECTIONS.map((sections) => (
+          <ListItemButton key={sections.sectionName}>
+            <ListItemIcon>{sections.sectionIcon}</ListItemIcon>
+            <ListItemText primary={sections.sectionName} />
+          </ListItemButton>
+        ))}
       </List>
     </Drawer>
   );
