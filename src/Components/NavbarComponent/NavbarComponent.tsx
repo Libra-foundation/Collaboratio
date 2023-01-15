@@ -6,27 +6,27 @@ import MenuDrawerComponent from "./MenuDrawerComponent/MenuDrawerComponent";
 import ProfileDrawerComponent from "./ProfileDrawerComponent/ProfileDrawerComponent";
 
 interface NavbarComponentState {
-  isOpenMenu: boolean;
-  isOpenProfile: boolean;
+  isMenuOpen: boolean;
+  isProfileOpen: boolean;
 }
 
 export default function NavbarComponent(): JSX.Element {
   const [IS_OPENMENU, SetOpenMenu] = React.useState<NavbarComponentState>({
-    isOpenMenu: false,
-    isOpenProfile: false,
+    isMenuOpen: false,
+    isProfileOpen: false,
   });
 
   const HandleOpenMenu = (): void => {
     SetOpenMenu({
       ...IS_OPENMENU,
-      isOpenMenu: !IS_OPENMENU.isOpenMenu,
+      isMenuOpen: !IS_OPENMENU.isMenuOpen,
     });
   };
 
   const HandleOpenProfile = (): void => {
     SetOpenMenu({
       ...IS_OPENMENU,
-      isOpenProfile: !IS_OPENMENU.isOpenProfile,
+      isProfileOpen: !IS_OPENMENU.isProfileOpen,
     });
   };
 
@@ -76,12 +76,12 @@ export default function NavbarComponent(): JSX.Element {
         </IconButton>
       </Container>
       <MenuDrawerComponent
-        isOpen={IS_OPENMENU.isOpenMenu}
-        close={HandleOpenMenu}
+        isOpen={IS_OPENMENU.isMenuOpen}
+        Close={HandleOpenMenu}
       />
       <ProfileDrawerComponent
-        isOpen={IS_OPENMENU.isOpenProfile}
-        close={HandleOpenProfile}
+        isOpen={IS_OPENMENU.isProfileOpen}
+        Close={HandleOpenProfile}
       />
     </AppBar>
   );

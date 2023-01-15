@@ -7,7 +7,15 @@ type Handler = (
 
 function ReportWebVitals(on_perf_entry?: ReportHandler): void {
   if (on_perf_entry && on_perf_entry instanceof Function) {
-    const A = import("web-vitals");
+    /* eslint-disable @typescript-eslint/naming-convention -- the names cannot be redefined */
+    const A: Promise<{
+      default: unknown;
+      getCLS: Handler;
+      getFCP: Handler;
+      getFID: Handler;
+      getLCP: Handler;
+      getTTFB: Handler;
+    }> = import("web-vitals");
     A.then(
       ({
         getCLS,
@@ -16,7 +24,6 @@ function ReportWebVitals(on_perf_entry?: ReportHandler): void {
         getLCP,
         getTTFB,
       }: Readonly<{
-        /* eslint-disable @typescript-eslint/naming-convention */
         getCLS: Handler;
         getFCP: Handler;
         getFID: Handler;

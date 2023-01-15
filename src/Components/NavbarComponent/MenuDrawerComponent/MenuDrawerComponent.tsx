@@ -11,21 +11,21 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 
 interface MenuDrawerProps {
   isOpen: boolean;
-  close: (event: {}, reason: "backdropClick" | "escapeKeyDown") => void;
+  Close: (event: unknown, reason: "backdropClick" | "escapeKeyDown") => void;
 }
 
 export default function MenuDrawerComponent(
   props: Readonly<MenuDrawerProps>
 ): JSX.Element {
-  const {isOpen, close} = props;
+  const {isOpen, Close} = props;
 
-  const SECTIONS = [
-    {sectionName: "Folder", sectionIcon: <FolderIcon />},
+  const SECTIONS: Array<{sectionName: string; sectionIcon: JSX.Element}> = [
+    {sectionName: "Documents", sectionIcon: <FolderIcon />},
     {sectionName: "Dashboard", sectionIcon: <DashboardIcon />},
   ];
 
   return (
-    <Drawer open={isOpen} onClose={close}>
+    <Drawer open={isOpen} onClose={Close}>
       <List>
         {SECTIONS.map((sections) => (
           <ListItemButton key={sections.sectionName}>
