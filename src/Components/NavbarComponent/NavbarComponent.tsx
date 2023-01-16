@@ -17,16 +17,20 @@ export default function NavbarComponent(): JSX.Element {
   });
 
   const HandleOpenMenu = (): void => {
-    SetOpenMenu({
-      ...IS_OPEN_MENU,
-      isMenuOpen: !IS_OPEN_MENU.isMenuOpen,
+    SetOpenMenu((old) => {
+      return {
+        ...old,
+        isMenuOpen: !IS_OPEN_MENU.isMenuOpen,
+      };
     });
   };
 
   const HandleOpenProfile = (): void => {
-    SetOpenMenu({
-      ...IS_OPEN_MENU,
-      isProfileOpen: !IS_OPEN_MENU.isProfileOpen,
+    SetOpenMenu((old) => {
+      return {
+        ...old,
+        isProfileOpen: !IS_OPEN_MENU.isProfileOpen,
+      };
     });
   };
 

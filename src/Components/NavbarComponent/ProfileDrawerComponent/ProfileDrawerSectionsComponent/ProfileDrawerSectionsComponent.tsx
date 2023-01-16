@@ -7,7 +7,7 @@ interface ISection {
   sectionIcon: Readonly<JSX.Element>;
 }
 
-export default function MenuDrawerSectionsComponent(): Array<JSX.Element> {
+export default function ProfileDrawerSectionsComponent(): Array<JSX.Element> {
   const SECTIONS: Array<ISection> = [
     {sectionName: "Account settings", sectionIcon: <ManageAccountsIcon />},
   ];

@@ -1,4 +1,4 @@
-import React, {type ChangeEventHandler} from "react";
+import React from "react";
 import {
   Drawer,
   List,
@@ -8,14 +8,10 @@ import {
 } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-
-interface MenuDrawerProps {
-  isOpen: boolean;
-  Close: ChangeEventHandler<HTMLInputElement>;
-}
+import {DrawerProps} from "../NavbarInterfaces";
 
 export default function MenuDrawerComponent(
-  props: Readonly<MenuDrawerProps>
+  props: Readonly<DrawerProps>
 ): JSX.Element {
   const {isOpen, Close} = props;
 

@@ -11,15 +11,11 @@ import {
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import {COLORMODECONTEXT} from "../../../Scripts/ThemeContext";
-import MenuDrawerSectionsComponent from "../MenuDrawerComponent/MenuDrawerSectionsComponent/MenuDrawerSectionsComponent";
-
-interface ProfileDrawerProps {
-  isOpen: boolean;
-  Close: (event: unknown, reason: "backdropClick" | "escapeKeyDown") => void;
-}
+import ProfileDrawerSectionsComponent from "./ProfileDrawerSectionsComponent/ProfileDrawerSectionsComponent";
+import {DrawerProps} from "../NavbarInterfaces";
 
 export default function ProfileDrawerComponent(
-  props: Readonly<ProfileDrawerProps>
+  props: Readonly<DrawerProps>
 ): JSX.Element {
   const {isOpen, Close} = props;
 
@@ -41,7 +37,7 @@ export default function ProfileDrawerComponent(
           </ListItemIcon>
           <ListItemText primary={THEME.palette.mode.concat(" mode")} />
         </ListItemButton>
-        {MenuDrawerSectionsComponent}
+        {ProfileDrawerSectionsComponent()}
       </List>
     </Drawer>
   );
