@@ -7,7 +7,7 @@ import {
 import React from "react";
 import NavbarComponent from "./Components/NavbarComponent/NavbarComponent";
 import DummyPage from "./Pages/DummyPage";
-import {COLORMODECONTEXT} from "./Scripts/ThemeContext";
+import {COLORMODECONTEXT} from "./Context/ThemeContext";
 
 function App(): JSX.Element {
   const [MODE, SetMode] = React.useState<"dark" | "light">("dark");

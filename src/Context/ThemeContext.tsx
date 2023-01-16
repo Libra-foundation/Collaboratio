@@ -1,6 +1,6 @@
 import React from "react";
 
-interface IThemeContext {
+export interface IThemeContext {
   ToggleColorMode: () => void;
 }
 

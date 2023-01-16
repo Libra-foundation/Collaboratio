@@ -3,7 +3,7 @@ import {ListItemButton, ListItemIcon, ListItemText} from "@mui/material";
 import {type DrawerSection} from "../NavbarInterfaces";
 
 export default function DrawerSectionsMapComponent(
-  sections: Readonly<Array<DrawerSection>>
+  sections: ReadonlyArray<DrawerSection>
 ): Array<JSX.Element> {
   return sections.map((section: Readonly<DrawerSection>) => (
     <ListItemButton key={section.SECTION_NAME}>

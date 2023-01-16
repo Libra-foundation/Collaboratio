@@ -10,7 +10,10 @@ import {
 } from "@mui/material";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
-import {COLORMODECONTEXT} from "../../../Scripts/ThemeContext";
+import {
+  COLORMODECONTEXT,
+  type IThemeContext,
+} from "../../../Context/ThemeContext";
 import DrawerSectionsMapComponent from "../DrawerSectionsMapComponent/DrawerSectionsMapComponent";
 import {type DrawerProps} from "../NavbarInterfaces";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
@@ -22,8 +25,7 @@ export default function ProfileDrawerComponent(
 
   const THEME: Theme = useTheme();
 
-  const COLORMODE: {ToggleColorMode: () => void} =
-    React.useContext(COLORMODECONTEXT);
+  const COLORMODE: IThemeContext = React.useContext(COLORMODECONTEXT);
 
   return (
     <Drawer open={isOpen} onClose={Close} anchor="right">
