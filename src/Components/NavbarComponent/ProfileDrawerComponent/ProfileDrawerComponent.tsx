@@ -12,7 +12,7 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import {COLORMODECONTEXT} from "../../../Scripts/ThemeContext";
 import ProfileDrawerSectionsComponent from "./ProfileDrawerSectionsComponent/ProfileDrawerSectionsComponent";
-import {DrawerProps} from "../NavbarInterfaces";
+import {type DrawerProps} from "../NavbarInterfaces";
 
 export default function ProfileDrawerComponent(
   props: Readonly<DrawerProps>

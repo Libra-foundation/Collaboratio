@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import {DrawerProps} from "../NavbarInterfaces";
+import {type DrawerProps} from "../NavbarInterfaces";
 
 export default function MenuDrawerComponent(
   props: Readonly<DrawerProps>
