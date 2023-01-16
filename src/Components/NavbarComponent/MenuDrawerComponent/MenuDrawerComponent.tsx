@@ -1,4 +1,4 @@
-import React from "react";
+import React, {type ChangeEventHandler} from "react";
 import {
   Drawer,
   List,
@@ -11,7 +11,7 @@ import DashboardIcon from "@mui/icons-material/Dashboard";
 
 interface MenuDrawerProps {
   isOpen: boolean;
-  Close: (event: unknown, reason: "backdropClick" | "escapeKeyDown") => void;
+  Close: ChangeEventHandler<HTMLInputElement>;
 }
 
 export default function MenuDrawerComponent(

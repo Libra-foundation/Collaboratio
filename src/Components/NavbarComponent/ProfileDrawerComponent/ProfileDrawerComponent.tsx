@@ -8,10 +8,10 @@ import {
   type Theme,
   useTheme,
 } from "@mui/material";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import {COLORMODECONTEXT} from "../../../Scripts/ThemeContext";
+import MenuDrawerSectionsComponent from "../MenuDrawerComponent/MenuDrawerSectionsComponent/MenuDrawerSectionsComponent";
 
 interface ProfileDrawerProps {
   isOpen: boolean;
@@ -23,11 +23,8 @@ export default function ProfileDrawerComponent(
 ): JSX.Element {
   const {isOpen, Close} = props;
 
-  const SECTIONS: Array<{sectionName: string; sectionIcon: JSX.Element}> = [
-    {sectionName: "Account settings", sectionIcon: <ManageAccountsIcon />},
-  ];
-
   const THEME: Theme = useTheme();
+
   const COLORMODE: {ToggleColorMode: () => void} =
     React.useContext(COLORMODECONTEXT);
 
@@ -44,12 +41,7 @@ export default function ProfileDrawerComponent(
           </ListItemIcon>
           <ListItemText primary={THEME.palette.mode.concat(" mode")} />
         </ListItemButton>
-        {SECTIONS.map((sections) => (
-          <ListItemButton key={sections.sectionName}>
-            <ListItemIcon>{sections.sectionIcon}</ListItemIcon>
-            <ListItemText primary={sections.sectionName} />
-          </ListItemButton>
-        ))}
+        {MenuDrawerSectionsComponent}
       </List>
     </Drawer>
   );
