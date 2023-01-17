@@ -30,15 +30,21 @@ export default function ProfileDrawerComponent(
   return (
     <Drawer open={isOpen} onClose={Close} anchor="right">
       <List>
-        <ListItemButton onClick={COLORMODE.ToggleColorMode}>
-          <ListItemIcon>
+        <ListItemButton
+          onClick={COLORMODE.ToggleColorMode}
+          data-testid="ChangeThemeButton"
+        >
+          <ListItemIcon data-testid="ThemeButtonIcon">
             {THEME.palette.mode === "dark" ? (
               <Brightness4Icon />
             ) : (
               <Brightness7Icon />
             )}
           </ListItemIcon>
-          <ListItemText primary={THEME.palette.mode.concat(" mode")} />
+          <ListItemText
+            primary={THEME.palette.mode.concat(" mode")}
+            data-testid="ThemeButtonText"
+          />
         </ListItemButton>
         <DrawerMapComponent
           sections={[
