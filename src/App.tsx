@@ -6,8 +6,9 @@ import {
 } from "@mui/material";
 import React from "react";
 import NavbarComponent from "./Components/NavbarComponent/NavbarComponent";
-import DummyPage from "./Pages/DummyPage";
 import {COLORMODECONTEXT} from "./Context/ThemeContext";
+import {RouterProvider} from "react-router-dom";
+import {ROUTES} from "./Routes/Routes";
 
 function App(): JSX.Element {
   const [MODE, SetMode] = React.useState<"dark" | "light">("dark");
@@ -34,9 +35,9 @@ function App(): JSX.Element {
   return (
     <COLORMODECONTEXT.Provider value={COLORMODE}>
       <ThemeProvider theme={THEME}>
+        <RouterProvider router={ROUTES} />
         <CssBaseline />
         <NavbarComponent />
-        <DummyPage />
       </ThemeProvider>
     </COLORMODECONTEXT.Provider>
   );

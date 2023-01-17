@@ -1,5 +1,5 @@
 import React from "react";
 
-export default function DummyPage(): JSX.Element {
+export default function ErrorPage(): JSX.Element {
   return <React.Fragment></React.Fragment>;
 }
