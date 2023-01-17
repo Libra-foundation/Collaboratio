@@ -2,8 +2,8 @@ import {AppBar, Container, IconButton, Typography} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import React from "react";
-import MenuDrawerComponent from "./MenuDrawerComponent/MenuDrawerComponent";
-import ProfileDrawerComponent from "./ProfileDrawerComponent/ProfileDrawerComponent";
+import MenuDrawerComponent from "./DrawerComponents/MenuDrawerComponent/MenuDrawerComponent";
+import ProfileDrawerComponent from "./DrawerComponents/ProfileDrawerComponent/ProfileDrawerComponent";
 
 interface NavbarComponentState {
   isMenuOpen: boolean;

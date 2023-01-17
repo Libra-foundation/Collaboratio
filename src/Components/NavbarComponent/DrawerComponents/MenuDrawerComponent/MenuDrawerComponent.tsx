@@ -2,8 +2,8 @@ import React from "react";
 import {Drawer, List} from "@mui/material";
 import FolderIcon from "@mui/icons-material/Folder";
 import DashboardIcon from "@mui/icons-material/Dashboard";
-import {type DrawerProps, type DrawerSection} from "../NavbarInterfaces";
-import DrawerSectionsMapComponent from "../DrawerSectionsMapComponent/DrawerSectionsMapComponent";
+import DrawerMapComponent from "../DrawerMapComponent";
+import {type DrawerProps, type DrawerSection} from "../DrawerInterfaces";
 
 export default function MenuDrawerComponent(
   props: Readonly<DrawerProps>
@@ -17,7 +17,9 @@ export default function MenuDrawerComponent(
 
   return (
     <Drawer open={isOpen} onClose={Close}>
-      <List>{DrawerSectionsMapComponent(SECTIONS)}</List>
+      <List>
+        <DrawerMapComponent sections={SECTIONS} />
+      </List>
     </Drawer>
   );
 }

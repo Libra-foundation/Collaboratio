@@ -13,10 +13,10 @@ import Brightness7Icon from "@mui/icons-material/Brightness7";
 import {
   COLORMODECONTEXT,
   type IThemeContext,
-} from "../../../Context/ThemeContext";
-import DrawerSectionsMapComponent from "../DrawerSectionsMapComponent/DrawerSectionsMapComponent";
-import {type DrawerProps} from "../NavbarInterfaces";
+} from "../../../../Context/ThemeContext";
+import DrawerMapComponent from "../DrawerMapComponent";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
+import {type DrawerProps} from "../DrawerInterfaces";
 
 export default function ProfileDrawerComponent(
   props: Readonly<DrawerProps>
@@ -40,12 +40,14 @@ export default function ProfileDrawerComponent(
           </ListItemIcon>
           <ListItemText primary={THEME.palette.mode.concat(" mode")} />
         </ListItemButton>
-        {DrawerSectionsMapComponent([
-          {
-            SECTION_NAME: "Account settings",
-            SECTION_ICON: <ManageAccountsIcon />,
-          },
-        ])}
+        <DrawerMapComponent
+          sections={[
+            {
+              SECTION_NAME: "Account settings",
+              SECTION_ICON: <ManageAccountsIcon />,
+            },
+          ]}
+        />
       </List>
     </Drawer>
   );

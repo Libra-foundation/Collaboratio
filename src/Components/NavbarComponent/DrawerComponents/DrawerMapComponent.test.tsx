@@ -1,9 +1,9 @@
 import React from "react";
 import {render, screen} from "@testing-library/react";
-import DrawerSectionsMapComponent from "./DrawerSectionsMapComponent";
+import DrawerMapComponent from "./DrawerMapComponent";
 import FolderIcon from "@mui/icons-material/Folder";
-import type {DrawerSection} from "../NavbarInterfaces";
 import {List} from "@mui/material";
+import {type DrawerSection} from "./DrawerInterfaces";
 
 const SECTIONS: Array<DrawerSection> = [
   {SECTION_NAME: "Section 1", SECTION_ICON: <FolderIcon />},
@@ -12,9 +12,13 @@ const SECTIONS: Array<DrawerSection> = [
   {SECTION_NAME: "Section 4", SECTION_ICON: <FolderIcon />},
 ];
 
-render(<List>{DrawerSectionsMapComponent(SECTIONS)}</List>);
+render(
+  <List>
+    <DrawerMapComponent sections={SECTIONS} />
+  </List>
+);
 
-test("DrawerSectionsMapComponent -- All elements visible", () => {
+test("DrawerComponents -- All elements visible", () => {
   let element: HTMLElement;
   for (const SECTION of SECTIONS) {
     element = screen.getByText(SECTION.SECTION_NAME);
