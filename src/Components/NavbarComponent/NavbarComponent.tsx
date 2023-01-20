@@ -50,6 +50,7 @@ export default function NavbarComponent(): JSX.Element {
           size="large"
           color="inherit"
           aria-label="open menu drawer"
+          data-testid="ButtonOpenMenuDrawer"
           onClick={HandleOpenMenu}
         >
           <MenuIcon />
@@ -74,6 +75,7 @@ export default function NavbarComponent(): JSX.Element {
           size="large"
           color="inherit"
           aria-label="open profile drawer"
+          data-testid="ButtonOpenProfileDrawer"
           onClick={HandleOpenProfile}
         >
           <AccountBoxIcon />

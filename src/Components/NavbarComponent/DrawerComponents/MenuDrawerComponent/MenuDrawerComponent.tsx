@@ -17,7 +17,7 @@ export default function MenuDrawerComponent(
 
   return (
     <Drawer open={isOpen} onClose={Close}>
-      <List>
+      <List data-testid="MenuListItem">
         <DrawerMapComponent sections={SECTIONS} />
       </List>
     </Drawer>
