@@ -7,32 +7,35 @@ type Handler = (
 
 function ReportWebVitals(on_perf_entry?: ReportHandler): void {
   if (on_perf_entry && on_perf_entry instanceof Function) {
-    const A = import("web-vitals");
+    /* eslint-disable @typescript-eslint/naming-convention -- the names cannot be redefined */
+    const A: Promise<{
+      default: unknown;
+      getCLS: Handler;
+      getFCP: Handler;
+      getFID: Handler;
+      getLCP: Handler;
+      getTTFB: Handler;
+    }> = import("web-vitals");
     A.then(
       ({
-        getCLS: get_cls,
-        getFID: get_fid,
-        getFCP: get_fcp,
-        getLCP: get_lcp,
-        getTTFB: get_ttfb,
+        getCLS,
+        getFID,
+        getFCP,
+        getLCP,
+        getTTFB,
       }: Readonly<{
-        // the names cannot be redefined
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         getCLS: Handler;
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         getFCP: Handler;
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         getFID: Handler;
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         getLCP: Handler;
-        // eslint-disable-next-line @typescript-eslint/naming-convention
         getTTFB: Handler;
+        /* eslint-enable @typescript-eslint/naming-convention */
       }>) => {
-        get_cls(on_perf_entry);
-        get_fid(on_perf_entry);
-        get_fcp(on_perf_entry);
-        get_lcp(on_perf_entry);
-        get_ttfb(on_perf_entry);
+        getCLS(on_perf_entry);
+        getFID(on_perf_entry);
+        getFCP(on_perf_entry);
+        getLCP(on_perf_entry);
+        getTTFB(on_perf_entry);
       },
       (reason) => {
         console.error(reason);
