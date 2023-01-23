@@ -1,6 +1,4 @@
-import type {Config} from "jest";
-
-const config: Config = {
+module.exports = {
   moduleNameMapper: {
     "\\.(css|scss|sass)$": "identity-obj-proxy",
   },
@@ -12,5 +10,3 @@ const config: Config = {
   testEnvironment: "jsdom",
   setupFilesAfterEnv: ["./src/setupTests.ts"],
 };
-
-export default config;
