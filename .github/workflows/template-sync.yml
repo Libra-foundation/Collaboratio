@@ -20,6 +20,6 @@ jobs:
       - name: actions-template-sync
         uses: AndreasAugustin/actions-template-sync@v0.6.0-draft
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.PAT }}
           source_repo_path: Libra-foundation/react-template
           pr_title: "[DOWNSTREAM] merge changes from template repository"
