@@ -8,8 +8,6 @@ jobs:
   build:
     permissions:
       pull-requests: write
-      actions: write
-      contents: write
 
     runs-on: ubuntu-latest
 
