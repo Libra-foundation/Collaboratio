@@ -9,6 +9,7 @@ import NavbarComponent from "./Components/NavbarComponent/NavbarComponent";
 import {COLORMODECONTEXT} from "./Context/ThemeContext";
 import {RouterProvider} from "react-router-dom";
 import {ROUTES} from "./Routes/Routes";
+import MarkdownPage from "./Pages/MarkdownPage/MarkdownPage";
 
 function App(): JSX.Element {
   const [MODE, SetMode] = React.useState<"dark" | "light">("dark");
@@ -38,6 +39,7 @@ function App(): JSX.Element {
         <RouterProvider router={ROUTES} />
         <CssBaseline />
         <NavbarComponent />
+        <MarkdownPage />
       </ThemeProvider>
     </COLORMODECONTEXT.Provider>
   );
