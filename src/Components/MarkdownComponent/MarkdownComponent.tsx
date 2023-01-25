@@ -3,7 +3,6 @@ import {
   Container,
   Divider,
   Paper,
-  TextareaAutosize,
   type Theme,
   ToggleButton,
   ToggleButtonGroup,
@@ -11,6 +10,7 @@ import {
 } from "@mui/material";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import ReactMarkdown from "react-markdown";
+import MarkdownStyle from "./MarkdownComponentStyle.module.sass";
 
 interface MarkdownComponentProps {
   mode: string;
@@ -29,6 +29,7 @@ export default function MarkdownComponent(
     if (mode === "Editor only") {
       return {
         textarea: {
+          borderRadius: "10px",
           width: "100%",
           overflowY: "auto",
         },
@@ -39,10 +40,13 @@ export default function MarkdownComponent(
     } else if (mode === "Editor and preview") {
       return {
         textarea: {
+          borderRadius: "10px 0 0 10px",
+          borderRight: "0",
           width: "50%",
           overflowY: "auto",
         },
         preview: {
+          borderRadius: "0 10px 10px 0",
           width: "50%",
           overflowY: "auto",
         },
@@ -56,6 +60,7 @@ export default function MarkdownComponent(
         preview: {
           width: "100%",
           overflowY: "auto",
+          borderRadius: "10px",
         },
       };
     }
@@ -75,40 +80,30 @@ export default function MarkdownComponent(
       sx={{width: "100%", height: "90%", display: "flex", flexDirection: "row"}}
     >
       <Paper variant="outlined" square={false} sx={Size().textarea}>
-        <ToggleButtonGroup sx={{width: "auto", position: "fixed"}}>
-          <ToggleButton value="test" sx={{border: 0}}>
-            <FormatAlignJustifyIcon />
-          </ToggleButton>
-        </ToggleButtonGroup>
-        <Divider sx={{paddingTop: "46px"}} />
-        <TextareaAutosize
-          value={MARKDOWN_INPUT}
-          maxRows={50}
-          autoFocus
-          style={{
-            width: "100%",
-            height: "calc(100% - 51px)",
-            boxSizing: "border-box",
-            resize: "none",
-            backgroundColor: "transparent",
-            color: THEME.palette.mode === "dark" ? "white" : "black",
-            borderRadius: "0 0 10px 10px",
-            border: "none",
-            fontFamily: "open sans, sans-serif",
-          }}
-          onChange={(e): void => {
-            SetMarkdownInput(e.target.value);
-          }}
-        />
-      </Paper>
-      <Paper variant="outlined" square={false} sx={Size().preview}>
         <ToggleButtonGroup sx={{width: "auto"}}>
           <ToggleButton value="test" sx={{border: 0}}>
             <FormatAlignJustifyIcon />
           </ToggleButton>
         </ToggleButtonGroup>
         <Divider />
-        <Container sx={{padding: "2%", height: "auto"}}>
+        <textarea
+          value={MARKDOWN_INPUT}
+          autoFocus
+          className={MarkdownStyle.textarea}
+          style={{color: THEME.palette.mode === "dark" ? "white" : "black"}}
+          onChange={(e): void => {
+            SetMarkdownInput(e.target.value);
+          }}
+        />
+      </Paper>
+      <Paper variant="outlined" square={false} sx={Size().preview}>
+        <ToggleButtonGroup sx={{width: "auto", position: "fixed", zIndex: "2"}}>
+          <ToggleButton value="test" sx={{border: 0}}>
+            <FormatAlignJustifyIcon />
+          </ToggleButton>
+        </ToggleButtonGroup>
+        <Divider sx={{paddingTop: "46px"}} />
+        <Container sx={{padding: "2%", height: "auto", zIndex: "0"}}>
           <ReactMarkdown>{MARKDOWN_INPUT}</ReactMarkdown>
         </Container>
       </Paper>
