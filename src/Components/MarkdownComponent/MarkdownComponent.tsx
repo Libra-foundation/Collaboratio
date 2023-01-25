@@ -2,6 +2,8 @@ import React from "react";
 import {
   Container,
   Divider,
+  Menu,
+  MenuItem,
   Paper,
   type Theme,
   ToggleButton,
@@ -84,13 +86,16 @@ export default function MarkdownComponent(
     };
   };
 
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
   const PREVIEW_BUTTON: Array<{value: string; icon: JSX.Element}> = [
-    {value: "h1", icon: <LooksOneIcon />},
-    {value: "h2", icon: <LooksTwoIcon />},
-    {value: "h3", icon: <Looks3Icon />},
-    {value: "h4", icon: <Looks4Icon />},
-    {value: "h5", icon: <Looks5Icon />},
-    {value: "h1", icon: <Looks6Icon />},
     {value: "bold", icon: <FormatBoldIcon />},
     {value: "italic", icon: <FormatItalicIcon />},
     {value: "quote", icon: <FormatQuoteIcon />},
@@ -102,6 +107,30 @@ export default function MarkdownComponent(
     >
       <Paper variant="outlined" square={false} sx={Size().textarea}>
         <ToggleButtonGroup sx={{width: "auto"}}>
+          <ToggleButton
+            value="ChooseTitleWeight"
+            onClick={handleClick}
+            sx={{border: "0"}}
+          >
+            <LooksOneIcon />
+          </ToggleButton>
+          <Menu open={open} anchorEl={anchorEl} onClose={handleClose}>
+            <MenuItem>
+              <LooksTwoIcon />
+            </MenuItem>
+            <MenuItem>
+              <Looks3Icon />
+            </MenuItem>
+            <MenuItem>
+              <Looks4Icon />
+            </MenuItem>
+            <MenuItem>
+              <Looks5Icon />
+            </MenuItem>
+            <MenuItem>
+              <Looks6Icon />
+            </MenuItem>
+          </Menu>
           {PREVIEW_BUTTON.map((icons) => {
             return (
               <ToggleButton
