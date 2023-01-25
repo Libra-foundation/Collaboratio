@@ -1,29 +1,58 @@
 import React from "react";
 import MarkdownComponent from "../../Components/MarkdownComponent/MarkdownComponent";
-import {Container, Paper, Tab, Tabs} from "@mui/material";
+import {Container, Tab, Tabs, useMediaQuery} from "@mui/material";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import ImageIcon from "@mui/icons-material/Image";
 
 export default function MarkdownPage(): JSX.Element {
-  const [PREVIEW_MODE, SetPreviewMode] = React.useState(0);
+  const [PREVIEW_MODE, SetPreviewMode] = React.useState("Editor only");
+
+  const IS_SMALL_SCREEN: boolean = useMediaQuery(
+    "@media only screen and (max-width: 600px)"
+  );
+
+  const HandleChangeModeSallScreen = () => {
+    if (IS_SMALL_SCREEN && PREVIEW_MODE === "Editor and preview") {
+      SetPreviewMode("Editor only");
+    } else if (!IS_SMALL_SCREEN) {
+      return (
+        <Tab
+          icon={<MenuBookIcon />}
+          label="Editor and preview"
+          value="Editor and preview"
+        />
+      );
+    }
+    return undefined;
+  };
 
   const HandleChangePreviewMode = (
     event: React.SyntheticEvent,
-    new_value: number
-  ) => {
+    new_value: string
+  ): void => {
     SetPreviewMode(new_value);
   };
 
   return (
-    <Paper
+    <Container
       sx={{
-        height: "80vh",
-        margin: {lg: "10vh 10vw 10vh 10vw", md: "10vh 0 0 0"},
-        width: {lg: "80vw", md: "100vw"},
-        borderRadius: "20px",
+        height: "calc(100vh - 60px)",
+        margin: {lg: "60px auto 0 auto", xs: "60px auto 0 auto"},
+        width: "100%",
+        borderRadius: {lg: "20px", md: "0"},
+        padding: {
+          xl: "0 5% 5% 5%",
+          lg: "0 5% 5% 5%",
+          md: "0",
+          sm: "0",
+          xs: "0",
+        },
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
       }}
-      elevation={1}
     >
       <Container
         sx={{
@@ -31,15 +60,26 @@ export default function MarkdownPage(): JSX.Element {
           justifyContent: "center",
           alignItems: "center",
           flexDirection: "column",
+          width: "100%",
         }}
       >
-        <Tabs value={PREVIEW_MODE} onChange={HandleChangePreviewMode}>
-          <Tab icon={<FormatAlignJustifyIcon />} label="Editor only" />
-          <Tab icon={<MenuBookIcon />} label="Editor and preview" />
-          <Tab icon={<ImageIcon />} label="Preview only" />
+        <Tabs
+          value={PREVIEW_MODE}
+          onChange={HandleChangePreviewMode}
+          variant="scrollable"
+          scrollButtons="auto"
+        >
+          <Tab
+            icon={<FormatAlignJustifyIcon />}
+            label="Editor only"
+            value="Editor only"
+          />
+          {}
+          {HandleChangeModeSallScreen()}
+          <Tab icon={<ImageIcon />} label="Preview only" value="Preview only" />
         </Tabs>
       </Container>
-      <MarkdownComponent />
-    </Paper>
+      <MarkdownComponent mode={PREVIEW_MODE} />
+    </Container>
   );
 }
