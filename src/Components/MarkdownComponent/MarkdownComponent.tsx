@@ -11,6 +11,15 @@ import {
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import ReactMarkdown from "react-markdown";
 import MarkdownStyle from "./MarkdownComponentStyle.module.sass";
+import LooksOneIcon from "@mui/icons-material/LooksOne";
+import LooksTwoIcon from "@mui/icons-material/LooksTwo";
+import Looks3Icon from "@mui/icons-material/Looks3";
+import Looks4Icon from "@mui/icons-material/Looks4";
+import Looks5Icon from "@mui/icons-material/Looks5";
+import Looks6Icon from "@mui/icons-material/Looks6";
+import FormatBoldIcon from "@mui/icons-material/FormatBold";
+import FormatItalicIcon from "@mui/icons-material/FormatItalic";
+import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 
 interface MarkdownComponentProps {
   mode: string;
@@ -75,15 +84,35 @@ export default function MarkdownComponent(
     };
   };
 
+  const PREVIEW_BUTTON: Array<{value: string; icon: JSX.Element}> = [
+    {value: "h1", icon: <LooksOneIcon />},
+    {value: "h2", icon: <LooksTwoIcon />},
+    {value: "h3", icon: <Looks3Icon />},
+    {value: "h4", icon: <Looks4Icon />},
+    {value: "h5", icon: <Looks5Icon />},
+    {value: "h1", icon: <Looks6Icon />},
+    {value: "bold", icon: <FormatBoldIcon />},
+    {value: "italic", icon: <FormatItalicIcon />},
+    {value: "quote", icon: <FormatQuoteIcon />},
+  ];
+
   return (
     <Container
       sx={{width: "100%", height: "90%", display: "flex", flexDirection: "row"}}
     >
       <Paper variant="outlined" square={false} sx={Size().textarea}>
         <ToggleButtonGroup sx={{width: "auto"}}>
-          <ToggleButton value="test" sx={{border: 0}}>
-            <FormatAlignJustifyIcon />
-          </ToggleButton>
+          {PREVIEW_BUTTON.map((icons) => {
+            return (
+              <ToggleButton
+                key={icons.value}
+                value={icons.value}
+                sx={{border: 0}}
+              >
+                {icons.icon}
+              </ToggleButton>
+            );
+          })}
         </ToggleButtonGroup>
         <Divider />
         <textarea
