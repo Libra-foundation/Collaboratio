@@ -12,7 +12,7 @@ export default function MarkdownPage(): JSX.Element {
     "@media only screen and (max-width: 600px)"
   );
 
-  const HandleChangeModeSallScreen = () => {
+  const TabRendering = () => {
     if (IS_SMALL_SCREEN && PREVIEW_MODE === "Editor and preview") {
       SetPreviewMode("Editor only");
     } else if (!IS_SMALL_SCREEN) {
@@ -41,13 +41,6 @@ export default function MarkdownPage(): JSX.Element {
         margin: {lg: "60px auto 0 auto", xs: "60px auto 0 auto"},
         width: "100%",
         borderRadius: {lg: "20px", md: "0"},
-        padding: {
-          xl: "0 5% 5% 5%",
-          lg: "0 5% 5% 5%",
-          md: "0",
-          sm: "0",
-          xs: "0",
-        },
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
@@ -75,7 +68,7 @@ export default function MarkdownPage(): JSX.Element {
             value="Editor only"
           />
           {}
-          {HandleChangeModeSallScreen()}
+          {TabRendering()}
           <Tab icon={<ImageIcon />} label="Preview only" value="Preview only" />
         </Tabs>
       </Container>
