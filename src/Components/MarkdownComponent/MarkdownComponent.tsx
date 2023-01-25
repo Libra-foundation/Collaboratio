@@ -10,7 +10,6 @@ import {
   useTheme,
 } from "@mui/material";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ReactMarkdown from "react-markdown";
 
 interface MarkdownComponentProps {
@@ -75,45 +74,37 @@ export default function MarkdownComponent(
     <Container
       sx={{width: "100%", height: "90%", display: "flex", flexDirection: "row"}}
     >
-      <Container sx={Size().textarea}>
-        <Paper
-          variant="outlined"
-          square={false}
-          sx={{borderRadius: "10px 10px 0 0", borderBottom: "0"}}
-        >
-          <ToggleButtonGroup sx={{width: "100%"}}>
-            <ToggleButton value="test" sx={{border: 0}}>
-              <FormatAlignJustifyIcon />
-              <ArrowDropDownIcon />
-            </ToggleButton>
-          </ToggleButtonGroup>
-        </Paper>
+      <Paper variant="outlined" square={false} sx={Size().textarea}>
+        <ToggleButtonGroup sx={{width: "auto", position: "fixed"}}>
+          <ToggleButton value="test" sx={{border: 0}}>
+            <FormatAlignJustifyIcon />
+          </ToggleButton>
+        </ToggleButtonGroup>
+        <Divider sx={{paddingTop: "46px"}} />
         <TextareaAutosize
           value={MARKDOWN_INPUT}
           maxRows={50}
           autoFocus
           style={{
             width: "100%",
-            height: "90%",
+            height: "calc(100% - 51px)",
             boxSizing: "border-box",
             resize: "none",
-            backgroundColor:
-              THEME.palette.mode === "dark" ? "#121212" : "white",
+            backgroundColor: "transparent",
             color: THEME.palette.mode === "dark" ? "white" : "black",
             borderRadius: "0 0 10px 10px",
-            border: "1px solid #2f2f2f",
+            border: "none",
             fontFamily: "open sans, sans-serif",
           }}
           onChange={(e): void => {
             SetMarkdownInput(e.target.value);
           }}
         />
-      </Container>
+      </Paper>
       <Paper variant="outlined" square={false} sx={Size().preview}>
-        <ToggleButtonGroup sx={{width: "100%"}}>
+        <ToggleButtonGroup sx={{width: "auto"}}>
           <ToggleButton value="test" sx={{border: 0}}>
             <FormatAlignJustifyIcon />
-            <ArrowDropDownIcon />
           </ToggleButton>
         </ToggleButtonGroup>
         <Divider />
