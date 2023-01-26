@@ -22,6 +22,9 @@ import Looks6Icon from "@mui/icons-material/Looks6";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
+import CodeIcon from "@mui/icons-material/Code";
+import TitleIcon from "@mui/icons-material/Title";
+import ButtonsTextareaComponent from "./ButtonsTextareaComponent/ButtonsTextareaComponent";
 
 interface MarkdownComponentProps {
   mode: string;
@@ -86,63 +89,12 @@ export default function MarkdownComponent(
     };
   };
 
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-
-  const PREVIEW_BUTTON: Array<{value: string; icon: JSX.Element}> = [
-    {value: "bold", icon: <FormatBoldIcon />},
-    {value: "italic", icon: <FormatItalicIcon />},
-    {value: "quote", icon: <FormatQuoteIcon />},
-  ];
-
   return (
     <Container
       sx={{width: "100%", height: "90%", display: "flex", flexDirection: "row"}}
     >
       <Paper variant="outlined" square={false} sx={Size().textarea}>
-        <ToggleButtonGroup sx={{width: "auto"}}>
-          <ToggleButton
-            value="ChooseTitleWeight"
-            onClick={handleClick}
-            sx={{border: "0"}}
-          >
-            <LooksOneIcon />
-          </ToggleButton>
-          <Menu open={open} anchorEl={anchorEl} onClose={handleClose}>
-            <MenuItem>
-              <LooksTwoIcon />
-            </MenuItem>
-            <MenuItem>
-              <Looks3Icon />
-            </MenuItem>
-            <MenuItem>
-              <Looks4Icon />
-            </MenuItem>
-            <MenuItem>
-              <Looks5Icon />
-            </MenuItem>
-            <MenuItem>
-              <Looks6Icon />
-            </MenuItem>
-          </Menu>
-          {PREVIEW_BUTTON.map((icons) => {
-            return (
-              <ToggleButton
-                key={icons.value}
-                value={icons.value}
-                sx={{border: 0}}
-              >
-                {icons.icon}
-              </ToggleButton>
-            );
-          })}
-        </ToggleButtonGroup>
+        <ButtonsTextareaComponent />
         <Divider />
         <textarea
           value={MARKDOWN_INPUT}
