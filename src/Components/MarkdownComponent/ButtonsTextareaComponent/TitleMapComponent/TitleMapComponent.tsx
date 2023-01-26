@@ -10,7 +10,7 @@ import Looks6Icon from "@mui/icons-material/Looks6";
 interface TitleMapComponentProps {
   isOpen: boolean;
   anchorEl: HTMLElement | null;
-  HandleClose: () => void;
+  HandleClose: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
 export default function TitleMapComponent(

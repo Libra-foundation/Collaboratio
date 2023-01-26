@@ -5,34 +5,72 @@ import ButtonsMapComponent from "./ButtonsMapComponent/ButtonsMapComponent";
 import TitleMapComponent from "./TitleMapComponent/TitleMapComponent";
 import TitleIcon from "@mui/icons-material/Title";
 
+interface IMenuState {
+  title: {
+    anchorEl: HTMLElement | null;
+    isOpen: boolean;
+  };
+  codeSnippet: {
+    anchorEl: HTMLElement | null;
+    isOpen: boolean;
+  };
+}
+
 export default function ButtonsTextareaComponent(): JSX.Element {
-  const [ANCHOR_EL, SetAnchorEl] = React.useState<HTMLElement | null>(null);
+  const [OPEN_AND_ANCHOR, SetOpenAndAnchor] = React.useState<IMenuState>({
+    title: {
+      anchorEl: null,
+      isOpen: false,
+    },
+    codeSnippet: {
+      anchorEl: null,
+      isOpen: false,
+    },
+  });
 
-  const IS_OPEN: boolean = Boolean(ANCHOR_EL);
-
-  const HandleClick = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    SetAnchorEl(event.currentTarget);
+  const HandleClickTitle = (
+    event: React.MouseEvent<HTMLElement, MouseEvent>
+  ): void => {
+    SetOpenAndAnchor({
+      ...OPEN_AND_ANCHOR,
+      title: {
+        anchorEl: event.currentTarget,
+        isOpen: !OPEN_AND_ANCHOR.title.isOpen,
+      },
+    });
   };
 
-  const HandleClose = (): void => {
-    SetAnchorEl(null);
+  const HandleClickCodeSnippet = (
+    event: React.MouseEvent<HTMLElement, MouseEvent>
+  ): void => {
+    SetOpenAndAnchor({
+      ...OPEN_AND_ANCHOR,
+      codeSnippet: {
+        anchorEl: event.currentTarget,
+        isOpen: !OPEN_AND_ANCHOR.codeSnippet.isOpen,
+      },
+    });
   };
 
   return (
     <ToggleButtonGroup sx={{width: "auto"}}>
       <ToggleButton
         value="ChooseTitleWeight"
-        onClick={HandleClick}
+        onClick={HandleClickTitle}
         sx={{border: "0"}}
       >
         <TitleIcon />
       </ToggleButton>
       <TitleMapComponent
-        isOpen={IS_OPEN}
-        anchorEl={ANCHOR_EL}
-        HandleClose={HandleClose}
+        isOpen={OPEN_AND_ANCHOR.title.isOpen}
+        anchorEl={OPEN_AND_ANCHOR.title.anchorEl}
+        HandleClose={HandleClickTitle}
       />
-      <ToggleButton value="" sx={{border: 0}}>
+      <ToggleButton
+        value="CodeSnippet"
+        onClick={HandleClickCodeSnippet}
+        sx={{border: 0}}
+      >
         <CodeIcon />
       </ToggleButton>
       <ButtonsMapComponent />
