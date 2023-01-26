@@ -2,7 +2,7 @@ import React from "react";
 import FormatBoldIcon from "@mui/icons-material/FormatBold";
 import FormatItalicIcon from "@mui/icons-material/FormatItalic";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
-import {Container, Divider, ToggleButton, useMediaQuery} from "@mui/material";
+import {Container, ToggleButton, useMediaQuery} from "@mui/material";
 import InsertLinkIcon from "@mui/icons-material/InsertLink";
 import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
@@ -11,11 +11,13 @@ import TitleIcon from "@mui/icons-material/Title";
 import CodeIcon from "@mui/icons-material/Code";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import {type IButtonsMapProps} from "../ButtonsTextareaInterfaces";
+import MenuMapComponent from "../MenuMap/MenuMapComponent";
 
 export default function ButtonsMapComponent(
   props: IButtonsMapProps
 ): JSX.Element {
-  const {ClickTitle, ClickCodeSnippet, mode} = props;
+  const {ClickTitle, ClickCodeSnippet, mode, isOpen, anchorEl, HandleClose} =
+    props;
 
   const IS_SMALL: boolean = useMediaQuery(
     "@media only screen and (max-width: 750px)"
@@ -91,11 +93,42 @@ export default function ButtonsMapComponent(
     },
   ];
 
+  const HandleCreateNewArray = (): Array<{
+    element: JSX.Element | string | undefined;
+  }> => {
+    const MY_NEW_ARRAY: Array<{element: JSX.Element | string | undefined}> = [];
+    PREVIEW_BUTTON.map(
+      (items): Array<{element: JSX.Element | string | undefined}> => {
+        if (!items.isOnSmallScreen) {
+          MY_NEW_ARRAY.push({element: items.icon});
+          return MY_NEW_ARRAY;
+        }
+        MY_NEW_ARRAY.push({element: undefined});
+        return MY_NEW_ARRAY;
+      }
+    );
+    console.log(MY_NEW_ARRAY);
+    return MY_NEW_ARRAY.length === 0 ? [{element: undefined}] : MY_NEW_ARRAY;
+  };
+
+  const HandleCreateNewArray2 = (): Array<{
+    element: JSX.Element | string | undefined;
+  }> => {
+    const MY_NEW_ARRAY: Array<{element: JSX.Element | string | undefined}> =
+      PREVIEW_BUTTON.filter((item) => {
+        if (!item.isOnSmallScreen) {
+          return {element: item.icon};
+        }
+        return {element: undefined};
+      });
+    return MY_NEW_ARRAY;
+  };
+
   return (
     <Container
       sx={{padding: "0 !important", display: "flex", flexDirection: "row"}}
     >
-      {PREVIEW_BUTTON.map((buttons) => {
+      {PREVIEW_BUTTON.map((buttons): JSX.Element | undefined => {
         if (
           IS_SMALL === buttons.isOnSmallScreen &&
           mode === "Editor and preview"
@@ -122,7 +155,14 @@ export default function ButtonsMapComponent(
             </ToggleButton>
           );
         }
+        return undefined;
       })}
+      <MenuMapComponent
+        isOpen={isOpen}
+        anchorEl={anchorEl}
+        HandleClose={HandleClose}
+        componentsToMap={HandleCreateNewArray()}
+      />
     </Container>
   );
 }
