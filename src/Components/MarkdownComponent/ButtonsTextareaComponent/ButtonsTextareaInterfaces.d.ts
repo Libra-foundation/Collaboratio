@@ -16,3 +16,13 @@ interface IButtonsMapProps extends IMenuMapProps {
   ClickCodeSnippet: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   mode: string;
 }
+
+interface IPreviewButton {
+  value: string;
+  icon: JSX.Element;
+  ClickAction: (
+    event: React.MouseEvent<HTMLElement, MouseEvent>
+  ) => undefined | void;
+  isOnSmallScreen: boolean;
+  isOnLargeScreen: boolean;
+}

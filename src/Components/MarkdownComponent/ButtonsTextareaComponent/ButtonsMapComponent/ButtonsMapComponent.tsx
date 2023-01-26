@@ -10,11 +10,14 @@ import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import TitleIcon from "@mui/icons-material/Title";
 import CodeIcon from "@mui/icons-material/Code";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
-import {type IButtonsMapProps} from "../ButtonsTextareaInterfaces";
+import {
+  type IButtonsMapProps,
+  type IPreviewButton,
+} from "../ButtonsTextareaInterfaces";
 import MenuMapComponent from "../MenuMap/MenuMapComponent";
 
 export default function ButtonsMapComponent(
-  props: IButtonsMapProps
+  props: Readonly<IButtonsMapProps>
 ): JSX.Element {
   const {ClickTitle, ClickCodeSnippet, mode, isOpen, anchorEl, HandleClose} =
     props;
@@ -23,73 +26,76 @@ export default function ButtonsMapComponent(
     "@media only screen and (max-width: 750px)"
   );
 
-  const PREVIEW_BUTTON: Array<{
-    value: string;
-    icon: JSX.Element;
-    ClickAction: (
-      event: React.MouseEvent<HTMLElement, MouseEvent>
-    ) => undefined | void;
-    isOnSmallScreen: boolean;
-  }> = [
+  const PREVIEW_BUTTON: Array<IPreviewButton> = [
     {
       value: "title",
       icon: <TitleIcon />,
       ClickAction: ClickTitle,
       isOnSmallScreen: true,
+      isOnLargeScreen: true,
     },
     {
       value: "CodeSnippet",
       icon: <CodeIcon />,
       ClickAction: ClickCodeSnippet,
       isOnSmallScreen: true,
+      isOnLargeScreen: true,
     },
     {
       value: "bold",
       icon: <FormatBoldIcon />,
       ClickAction: () => undefined,
       isOnSmallScreen: false,
+      isOnLargeScreen: true,
     },
     {
       value: "italic",
       icon: <FormatItalicIcon />,
       ClickAction: () => undefined,
       isOnSmallScreen: false,
+      isOnLargeScreen: true,
     },
     {
       value: "quote",
       icon: <FormatQuoteIcon />,
       ClickAction: () => undefined,
       isOnSmallScreen: false,
+      isOnLargeScreen: true,
     },
     {
       value: "link",
       icon: <InsertLinkIcon />,
       ClickAction: () => undefined,
       isOnSmallScreen: false,
+      isOnLargeScreen: true,
     },
     {
       value: "numbered list",
       icon: <FormatListNumberedIcon />,
       ClickAction: () => undefined,
       isOnSmallScreen: false,
+      isOnLargeScreen: true,
     },
     {
       value: "bulleted list",
       icon: <FormatListBulletedIcon />,
       ClickAction: () => undefined,
       isOnSmallScreen: false,
+      isOnLargeScreen: true,
     },
     {
       value: "checkbox",
       icon: <CheckBoxOutlineBlankIcon />,
       ClickAction: () => undefined,
       isOnSmallScreen: false,
+      isOnLargeScreen: true,
     },
     {
       value: "listOptions",
       icon: <FormatAlignJustifyIcon />,
       ClickAction: () => undefined,
       isOnSmallScreen: true,
+      isOnLargeScreen: false,
     },
   ];
 
@@ -107,7 +113,6 @@ export default function ButtonsMapComponent(
         return MY_NEW_ARRAY;
       }
     );
-    console.log(MY_NEW_ARRAY);
     return MY_NEW_ARRAY.length === 0 ? [{element: undefined}] : MY_NEW_ARRAY;
   };
 
