@@ -1,9 +1,7 @@
 import React from "react";
-import {ToggleButton, ToggleButtonGroup} from "@mui/material";
-import CodeIcon from "@mui/icons-material/Code";
+import {ToggleButtonGroup} from "@mui/material";
 import ButtonsMapComponent from "./ButtonsMapComponent/ButtonsMapComponent";
 import TitleMapComponent from "./TitleMapComponent/TitleMapComponent";
-import TitleIcon from "@mui/icons-material/Title";
 import CodeSnippetMapComponent from "./CodeSnippetMapComponent/CodeSnippetMapComponent";
 
 interface IMenuState {
@@ -55,31 +53,20 @@ export default function ButtonsTextareaComponent(): JSX.Element {
 
   return (
     <ToggleButtonGroup sx={{width: "auto"}}>
-      <ToggleButton
-        value="ChooseTitleWeight"
-        onClick={HandleClickTitle}
-        sx={{border: "0"}}
-      >
-        <TitleIcon />
-      </ToggleButton>
+      <ButtonsMapComponent
+        ClickCodeSnippet={HandleClickCodeSnippet}
+        ClickTitle={HandleClickTitle}
+      />
       <TitleMapComponent
         isOpen={OPEN_AND_ANCHOR.title.isOpen}
         anchorEl={OPEN_AND_ANCHOR.title.anchorEl}
         HandleClose={HandleClickTitle}
       />
-      <ToggleButton
-        value="CodeSnippet"
-        onClick={HandleClickCodeSnippet}
-        sx={{border: 0}}
-      >
-        <CodeIcon />
-      </ToggleButton>
       <CodeSnippetMapComponent
         isOpen={OPEN_AND_ANCHOR.codeSnippet.isOpen}
         anchorEl={OPEN_AND_ANCHOR.codeSnippet.anchorEl}
         HandleClose={HandleClickCodeSnippet}
       />
-      <ButtonsMapComponent />
     </ToggleButtonGroup>
   );
 }
