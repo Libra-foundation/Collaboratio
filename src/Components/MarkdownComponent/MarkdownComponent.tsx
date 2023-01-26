@@ -2,8 +2,6 @@ import React from "react";
 import {
   Container,
   Divider,
-  Menu,
-  MenuItem,
   Paper,
   type Theme,
   ToggleButton,
@@ -13,17 +11,6 @@ import {
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import ReactMarkdown from "react-markdown";
 import MarkdownStyle from "./MarkdownComponentStyle.module.sass";
-import LooksOneIcon from "@mui/icons-material/LooksOne";
-import LooksTwoIcon from "@mui/icons-material/LooksTwo";
-import Looks3Icon from "@mui/icons-material/Looks3";
-import Looks4Icon from "@mui/icons-material/Looks4";
-import Looks5Icon from "@mui/icons-material/Looks5";
-import Looks6Icon from "@mui/icons-material/Looks6";
-import FormatBoldIcon from "@mui/icons-material/FormatBold";
-import FormatItalicIcon from "@mui/icons-material/FormatItalic";
-import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
-import CodeIcon from "@mui/icons-material/Code";
-import TitleIcon from "@mui/icons-material/Title";
 import ButtonsTextareaComponent from "./ButtonsTextareaComponent/ButtonsTextareaComponent";
 
 interface MarkdownComponentProps {
