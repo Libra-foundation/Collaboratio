@@ -11,20 +11,36 @@ import {
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import ReactMarkdown from "react-markdown";
 import MarkdownStyle from "./MarkdownComponentStyle.module.sass";
-import ButtonsTextareaComponent from "./ButtonsTextareaComponent/ButtonsTextareaComponent";
+import TextareaButtonsComponent from "./ButtonsTextareaComponent/TextareaButtonsComponent";
 
-interface MarkdownComponentProps {
+interface IMarkdownComponentProps {
   mode: string;
 }
 
 export default function MarkdownComponent(
-  props: Readonly<MarkdownComponentProps>
+  props: Readonly<IMarkdownComponentProps>
 ): JSX.Element {
   const {mode} = props;
 
   const [MARKDOWN_INPUT, SetMarkdownInput] = React.useState("# Hello world");
 
   const THEME: Theme = useTheme();
+
+  const [POSITIONS, SetPositions] = React.useState<{
+    startPosition: number | null;
+    endPosition: number | null;
+  }>();
+
+  const HandleOnSelect = (
+    event: React.SyntheticEvent<HTMLTextAreaElement, Event>
+  ): void => {
+    const TARGET: HTMLTextAreaElement = event.target as HTMLTextAreaElement;
+    SetPositions({
+      ...POSITIONS,
+      startPosition: TARGET.selectionStart,
+      endPosition: TARGET.selectionEnd,
+    });
+  };
 
   const Size = (): Record<string, Record<string, string>> => {
     if (mode === "Editor only") {
@@ -81,9 +97,11 @@ export default function MarkdownComponent(
       sx={{width: "100%", height: "90%", display: "flex", flexDirection: "row"}}
     >
       <Paper variant="outlined" square={false} sx={Size().textarea}>
-        <ButtonsTextareaComponent />
+        <TextareaButtonsComponent mode={mode} />
         <Divider />
         <textarea
+          id="TextareaMarkdown"
+          onSelect={HandleOnSelect}
           value={MARKDOWN_INPUT}
           autoFocus
           className={MarkdownStyle.textarea}

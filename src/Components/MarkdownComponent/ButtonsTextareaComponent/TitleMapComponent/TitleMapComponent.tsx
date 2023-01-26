@@ -6,11 +6,9 @@ import Looks3Icon from "@mui/icons-material/Looks3";
 import Looks4Icon from "@mui/icons-material/Looks4";
 import Looks5Icon from "@mui/icons-material/Looks5";
 import Looks6Icon from "@mui/icons-material/Looks6";
-import {type IMapComponentProps} from "../ButtonsTextareaInterfaces";
+import {type IMapMenuProps} from "../ButtonsTextareaInterfaces";
 
-export default function TitleMapComponent(
-  props: IMapComponentProps
-): JSX.Element {
+export default function TitleMapComponent(props: IMapMenuProps): JSX.Element {
   const {isOpen, anchorEl, HandleClose} = props;
 
   const MENU_ITEM_TITLES: Array<{icon: JSX.Element}> = [

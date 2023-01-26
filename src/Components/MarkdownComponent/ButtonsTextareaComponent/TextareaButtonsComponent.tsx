@@ -3,6 +3,7 @@ import {ToggleButtonGroup} from "@mui/material";
 import ButtonsMapComponent from "./ButtonsMapComponent/ButtonsMapComponent";
 import TitleMapComponent from "./TitleMapComponent/TitleMapComponent";
 import CodeSnippetMapComponent from "./CodeSnippetMapComponent/CodeSnippetMapComponent";
+import {type ITextareaButtonsProps} from "./ButtonsTextareaInterfaces";
 
 interface IMenuState {
   title: {
@@ -15,7 +16,11 @@ interface IMenuState {
   };
 }
 
-export default function ButtonsTextareaComponent(): JSX.Element {
+export default function TextareaButtonsComponent(
+  props: Readonly<ITextareaButtonsProps>
+): JSX.Element {
+  const {mode} = props;
+
   const [OPEN_AND_ANCHOR, SetOpenAndAnchor] = React.useState<IMenuState>({
     title: {
       anchorEl: null,
@@ -56,6 +61,7 @@ export default function ButtonsTextareaComponent(): JSX.Element {
       <ButtonsMapComponent
         ClickCodeSnippet={HandleClickCodeSnippet}
         ClickTitle={HandleClickTitle}
+        mode={mode}
       />
       <TitleMapComponent
         isOpen={OPEN_AND_ANCHOR.title.isOpen}

@@ -1,9 +1,9 @@
 import React from "react";
 import {Menu, MenuItem} from "@mui/material";
-import {type IMapComponentProps} from "../ButtonsTextareaInterfaces";
+import {type IMapMenuProps} from "../ButtonsTextareaInterfaces";
 
 export default function CodeSnippetMapComponent(
-  props: IMapComponentProps
+  props: IMapMenuProps
 ): JSX.Element {
   const {isOpen, anchorEl, HandleClose} = props;
 

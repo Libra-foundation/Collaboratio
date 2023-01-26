@@ -12,7 +12,7 @@ export default function MarkdownPage(): JSX.Element {
     "@media only screen and (max-width: 600px)"
   );
 
-  const TabRendering = () => {
+  const TabRendering = (): JSX.Element | undefined => {
     if (IS_SMALL_SCREEN && PREVIEW_MODE === "Editor and preview") {
       SetPreviewMode("Editor only");
     } else if (!IS_SMALL_SCREEN) {
