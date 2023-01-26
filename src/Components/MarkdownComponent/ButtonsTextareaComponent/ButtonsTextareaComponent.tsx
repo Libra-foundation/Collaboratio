@@ -4,6 +4,7 @@ import CodeIcon from "@mui/icons-material/Code";
 import ButtonsMapComponent from "./ButtonsMapComponent/ButtonsMapComponent";
 import TitleMapComponent from "./TitleMapComponent/TitleMapComponent";
 import TitleIcon from "@mui/icons-material/Title";
+import CodeSnippetMapComponent from "./CodeSnippetMapComponent/CodeSnippetMapComponent";
 
 interface IMenuState {
   title: {
@@ -73,6 +74,11 @@ export default function ButtonsTextareaComponent(): JSX.Element {
       >
         <CodeIcon />
       </ToggleButton>
+      <CodeSnippetMapComponent
+        isOpen={OPEN_AND_ANCHOR.codeSnippet.isOpen}
+        anchorEl={OPEN_AND_ANCHOR.codeSnippet.anchorEl}
+        HandleClose={HandleClickCodeSnippet}
+      />
       <ButtonsMapComponent />
     </ToggleButtonGroup>
   );

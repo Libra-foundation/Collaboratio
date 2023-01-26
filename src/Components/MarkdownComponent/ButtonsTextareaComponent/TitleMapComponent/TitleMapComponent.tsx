@@ -6,15 +6,10 @@ import Looks3Icon from "@mui/icons-material/Looks3";
 import Looks4Icon from "@mui/icons-material/Looks4";
 import Looks5Icon from "@mui/icons-material/Looks5";
 import Looks6Icon from "@mui/icons-material/Looks6";
-
-interface TitleMapComponentProps {
-  isOpen: boolean;
-  anchorEl: HTMLElement | null;
-  HandleClose: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-}
+import {type IMapComponentProps} from "../ButtonsTextareaInterfaces";
 
 export default function TitleMapComponent(
-  props: TitleMapComponentProps
+  props: IMapComponentProps
 ): JSX.Element {
   const {isOpen, anchorEl, HandleClose} = props;
 
