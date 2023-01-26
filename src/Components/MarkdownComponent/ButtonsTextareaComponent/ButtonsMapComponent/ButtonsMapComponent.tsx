@@ -115,20 +115,17 @@ export default function ButtonsMapComponent(
     );
     return MY_NEW_ARRAY.length === 0 ? [{element: undefined}] : MY_NEW_ARRAY;
   };
-
+  /*
   const HandleCreateNewArray2 = (): Array<{
     element: JSX.Element | string | undefined;
   }> => {
-    const MY_NEW_ARRAY: Array<{element: JSX.Element | string | undefined}> =
+    const MY_NEW_ARRAY: Array<IPreviewButton}> =
       PREVIEW_BUTTON.filter((item) => {
-        if (!item.isOnSmallScreen) {
-          return {element: item.icon};
-        }
-        return {element: undefined};
+        return !item.isOnSmallScreen
       });
-    return MY_NEW_ARRAY;
+    const OTHER_ARRAY: Array<{element:JSX.Element | string | undefined}> = []
   };
-
+*/
   return (
     <Container
       sx={{padding: "0 !important", display: "flex", flexDirection: "row"}}
@@ -148,7 +145,7 @@ export default function ButtonsMapComponent(
               {buttons.icon}
             </ToggleButton>
           );
-        } else if (mode !== "Editor and preview" && !buttons.isOnSmallScreen) {
+        } else if (mode !== "Editor and preview" && buttons.isOnLargeScreen) {
           return (
             <ToggleButton
               key={buttons.value}
