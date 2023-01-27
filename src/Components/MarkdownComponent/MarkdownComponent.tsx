@@ -118,8 +118,12 @@ export default function MarkdownComponent(
           </ToggleButton>
         </ToggleButtonGroup>
         <Divider sx={{paddingTop: "46px"}} />
-        <Container sx={{padding: "2%", height: "auto", zIndex: "0"}}>
-          <ReactMarkdown>{MARKDOWN_INPUT}</ReactMarkdown>
+        <Container
+          sx={{padding: "2%", height: "auto", zIndex: "0", maxWidth: "100%"}}
+        >
+          <ReactMarkdown style={{maxWidth: "100%"}}>
+            {MARKDOWN_INPUT}
+          </ReactMarkdown>
         </Container>
       </Paper>
     </Container>
