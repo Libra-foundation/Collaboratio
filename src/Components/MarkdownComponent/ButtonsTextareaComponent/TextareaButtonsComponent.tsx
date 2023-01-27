@@ -88,12 +88,7 @@ export default function TextareaButtonsComponent(
   }> = [
     {
       element: <LooksOneIcon />,
-      ClickAction: MarkdownTitles({
-        thingToInsert: "#",
-        startPos: positions?.startPosition,
-        endPos: positions?.endPosition,
-        markdownState: markdownInput,
-      }),
+      ClickAction: MarkdownTitles,
     },
     {element: <LooksTwoIcon />, ClickAction: () => undefined},
     {element: <Looks3Icon />, ClickAction: () => undefined},
