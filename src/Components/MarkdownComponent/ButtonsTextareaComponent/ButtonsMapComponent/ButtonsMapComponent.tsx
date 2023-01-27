@@ -26,6 +26,10 @@ export default function ButtonsMapComponent(
     "@media only screen and (max-width: 750px)"
   );
 
+  const IS_EXTREM_SMALL: boolean = useMediaQuery(
+    "@media only screen and (max-width: 500px)"
+  );
+
   const PREVIEW_BUTTON: Array<IPreviewButton> = [
     {
       value: "title",
@@ -93,7 +97,7 @@ export default function ButtonsMapComponent(
     {
       value: "listOptions",
       icon: <FormatAlignJustifyIcon />,
-      ClickAction: () => undefined,
+      ClickAction: HandleClose,
       isOnSmallScreen: true,
       isOnLargeScreen: false,
     },
@@ -102,38 +106,25 @@ export default function ButtonsMapComponent(
   const HandleCreateNewArray = (): Array<{
     element: JSX.Element | string | undefined;
   }> => {
-    const MY_NEW_ARRAY: Array<{element: JSX.Element | string | undefined}> = [];
-    PREVIEW_BUTTON.map(
-      (items): Array<{element: JSX.Element | string | undefined}> => {
-        if (!items.isOnSmallScreen) {
-          MY_NEW_ARRAY.push({element: items.icon});
-          return MY_NEW_ARRAY;
-        }
-        MY_NEW_ARRAY.push({element: undefined});
-        return MY_NEW_ARRAY;
-      }
-    );
-    return MY_NEW_ARRAY.length === 0 ? [{element: undefined}] : MY_NEW_ARRAY;
+    return PREVIEW_BUTTON.filter(
+      ({isOnSmallScreen, isOnLargeScreen}) =>
+        !isOnSmallScreen && isOnLargeScreen
+    ).map(({icon}): {element: JSX.Element | string | undefined} => {
+      return {
+        element: icon,
+      };
+    });
   };
-  /*
-  const HandleCreateNewArray2 = (): Array<{
-    element: JSX.Element | string | undefined;
-  }> => {
-    const MY_NEW_ARRAY: Array<IPreviewButton}> =
-      PREVIEW_BUTTON.filter((item) => {
-        return !item.isOnSmallScreen
-      });
-    const OTHER_ARRAY: Array<{element:JSX.Element | string | undefined}> = []
-  };
-*/
+
   return (
     <Container
       sx={{padding: "0 !important", display: "flex", flexDirection: "row"}}
     >
       {PREVIEW_BUTTON.map((buttons): JSX.Element | undefined => {
         if (
-          IS_SMALL === buttons.isOnSmallScreen &&
-          mode === "Editor and preview"
+          (IS_SMALL === buttons.isOnSmallScreen &&
+            mode === "Editor and preview") ||
+          IS_EXTREM_SMALL === buttons.isOnSmallScreen
         ) {
           return (
             <ToggleButton
@@ -145,7 +136,11 @@ export default function ButtonsMapComponent(
               {buttons.icon}
             </ToggleButton>
           );
-        } else if (mode !== "Editor and preview" && buttons.isOnLargeScreen) {
+        } else if (
+          mode !== "Editor and preview" &&
+          buttons.isOnLargeScreen &&
+          !IS_EXTREM_SMALL
+        ) {
           return (
             <ToggleButton
               key={buttons.value}
