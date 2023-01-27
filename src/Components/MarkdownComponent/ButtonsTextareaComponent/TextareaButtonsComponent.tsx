@@ -28,7 +28,7 @@ interface IMenuState {
 export default function TextareaButtonsComponent(
   props: Readonly<ITextareaButtonsProps>
 ): JSX.Element {
-  const {mode} = props;
+  const {mode, positions, markdownInput} = props;
 
   const [OPEN_AND_ANCHOR, SetOpenAndAnchor] = React.useState<IMenuState>({
     title: {
@@ -81,20 +81,26 @@ export default function TextareaButtonsComponent(
     });
   };
 
-  const MENU_ITEM_TITLES: Array<{element: JSX.Element}> = [
-    {element: <LooksOneIcon />},
-    {element: <LooksTwoIcon />},
-    {element: <Looks3Icon />},
-    {element: <Looks4Icon />},
-    {element: <Looks5Icon />},
-    {element: <Looks6Icon />},
+  const MENU_ITEM_TITLES: Array<{
+    element: JSX.Element;
+    ClickAction: () => undefined;
+  }> = [
+    {element: <LooksOneIcon />, ClickAction: () => undefined},
+    {element: <LooksTwoIcon />, ClickAction: () => undefined},
+    {element: <Looks3Icon />, ClickAction: () => undefined},
+    {element: <Looks4Icon />, ClickAction: () => undefined},
+    {element: <Looks5Icon />, ClickAction: () => undefined},
+    {element: <Looks6Icon />, ClickAction: () => undefined},
   ];
-  const MENU_ITEM_CODE_SNIPPET: Array<{element: string}> = [
-    {element: "Simple block"},
-    {element: "Javascript"},
-    {element: "Typescript"},
-    {element: "JSON"},
-    {element: "YAML"},
+  const MENU_ITEM_CODE_SNIPPET: Array<{
+    element: string;
+    ClickAction: () => undefined;
+  }> = [
+    {element: "Simple block", ClickAction: () => undefined},
+    {element: "Javascript", ClickAction: () => undefined},
+    {element: "Typescript", ClickAction: () => undefined},
+    {element: "JSON", ClickAction: () => undefined},
+    {element: "YAML", ClickAction: () => undefined},
   ];
 
   return (
@@ -106,6 +112,8 @@ export default function TextareaButtonsComponent(
         isOpen={OPEN_AND_ANCHOR.optionsMenu.isOpen}
         anchorEl={OPEN_AND_ANCHOR.optionsMenu.anchorEl}
         HandleClose={HandleClickOptionsMenu}
+        positions={positions}
+        markdownInput={markdownInput}
       />
       <MenuMapComponent
         isOpen={OPEN_AND_ANCHOR.title.isOpen}

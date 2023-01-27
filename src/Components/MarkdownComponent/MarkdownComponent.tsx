@@ -97,7 +97,11 @@ export default function MarkdownComponent(
       sx={{width: "100%", height: "90%", display: "flex", flexDirection: "row"}}
     >
       <Paper variant="outlined" square={false} sx={Size().textarea}>
-        <TextareaButtonsComponent mode={mode} />
+        <TextareaButtonsComponent
+          mode={mode}
+          positions={POSITIONS}
+          markdownInput={MARKDOWN_INPUT}
+        />
         <Divider />
         <textarea
           id="TextareaMarkdown"

@@ -4,17 +4,27 @@ interface IMenuMapProps {
   isOpen: boolean;
   anchorEl: HTMLElement | null;
   HandleClose: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  componentsToMap?: Array<{element: JSX.Element | string | undefined}>;
+  componentsToMap: Array<IElementsToMap>;
+}
+
+interface IElementsToMap {
+  element: JSX.Element | string | undefined;
+  ClickAction: (
+    event: React.MouseEvent<HTMLElement, MouseEvent>
+  ) => undefined | void;
 }
 
 interface ITextareaButtonsProps {
   mode: string;
+  positions:
+    | {startPosition: number | null; endPosition: number | null}
+    | undefined;
+  markdownInput: string;
 }
 
-interface IButtonsMapProps extends IMenuMapProps {
+interface IButtonsMapProps extends IMenuMapProps, ITextareaButtonsProps {
   ClickTitle: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   ClickCodeSnippet: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  mode: string;
 }
 
 interface IPreviewButton {

@@ -12,6 +12,7 @@ import CodeIcon from "@mui/icons-material/Code";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import {
   type IButtonsMapProps,
+  IElementsToMap,
   type IPreviewButton,
 } from "../ButtonsTextareaInterfaces";
 import MenuMapComponent from "../MenuMap/MenuMapComponent";
@@ -19,11 +20,19 @@ import MenuMapComponent from "../MenuMap/MenuMapComponent";
 export default function ButtonsMapComponent(
   props: Readonly<IButtonsMapProps>
 ): JSX.Element {
-  const {ClickTitle, ClickCodeSnippet, mode, isOpen, anchorEl, HandleClose} =
-    props;
+  const {
+    ClickTitle,
+    ClickCodeSnippet,
+    mode,
+    isOpen,
+    anchorEl,
+    HandleClose,
+    positions,
+    markdownInput,
+  } = props;
 
   const IS_SMALL: boolean = useMediaQuery(
-    "@media only screen and (max-width: 750px)"
+    "@media only screen and (max-width: 920px)"
   );
 
   const IS_EXTREM_SMALL: boolean = useMediaQuery(
@@ -103,15 +112,14 @@ export default function ButtonsMapComponent(
     },
   ];
 
-  const HandleCreateNewArray = (): Array<{
-    element: JSX.Element | string | undefined;
-  }> => {
+  const HandleCreateNewArray = (): Array<IElementsToMap> => {
     return PREVIEW_BUTTON.filter(
       ({isOnSmallScreen, isOnLargeScreen}) =>
         !isOnSmallScreen && isOnLargeScreen
-    ).map(({icon}): {element: JSX.Element | string | undefined} => {
+    ).map((items): IElementsToMap => {
       return {
-        element: icon,
+        element: items.icon,
+        ClickAction: items.ClickAction,
       };
     });
   };
@@ -122,9 +130,10 @@ export default function ButtonsMapComponent(
     >
       {PREVIEW_BUTTON.map((buttons): JSX.Element | undefined => {
         if (
-          (IS_SMALL === buttons.isOnSmallScreen &&
+          (IS_SMALL &&
+            buttons.isOnSmallScreen &&
             mode === "Editor and preview") ||
-          IS_EXTREM_SMALL === buttons.isOnSmallScreen
+          (IS_EXTREM_SMALL && buttons.isOnSmallScreen)
         ) {
           return (
             <ToggleButton
@@ -137,9 +146,13 @@ export default function ButtonsMapComponent(
             </ToggleButton>
           );
         } else if (
-          mode !== "Editor and preview" &&
-          buttons.isOnLargeScreen &&
-          !IS_EXTREM_SMALL
+          (mode !== "Editor and preview" &&
+            buttons.isOnLargeScreen &&
+            !IS_EXTREM_SMALL) ||
+          (mode === "Editor and preview" &&
+            !IS_SMALL &&
+            !IS_EXTREM_SMALL &&
+            buttons.isOnLargeScreen)
         ) {
           return (
             <ToggleButton
