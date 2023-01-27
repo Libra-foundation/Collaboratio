@@ -9,6 +9,7 @@ import Looks3Icon from "@mui/icons-material/Looks3";
 import Looks4Icon from "@mui/icons-material/Looks4";
 import Looks5Icon from "@mui/icons-material/Looks5";
 import Looks6Icon from "@mui/icons-material/Looks6";
+import MarkdownTitles from "../../../Scripts/MarkdownTitles";
 
 interface IMenuState {
   title: {
@@ -85,7 +86,15 @@ export default function TextareaButtonsComponent(
     element: JSX.Element;
     ClickAction: () => undefined;
   }> = [
-    {element: <LooksOneIcon />, ClickAction: () => undefined},
+    {
+      element: <LooksOneIcon />,
+      ClickAction: MarkdownTitles({
+        thingToInsert: "#",
+        startPos: positions?.startPosition,
+        endPos: positions?.endPosition,
+        markdownState: markdownInput,
+      }),
+    },
     {element: <LooksTwoIcon />, ClickAction: () => undefined},
     {element: <Looks3Icon />, ClickAction: () => undefined},
     {element: <Looks4Icon />, ClickAction: () => undefined},

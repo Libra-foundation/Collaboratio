@@ -1,7 +1,7 @@
 interface IMarkdownTitlesParams {
   thingToInsert: string;
-  startPos: number;
-  endPos: number;
+  startPos: number | null | undefined;
+  endPos: number | null | undefined;
   markdownState: string;
 }
 
@@ -10,9 +10,9 @@ export default function MarkdownTitles(
 ): string | undefined {
   const {thingToInsert, startPos, endPos, markdownState} = params;
 
-  if (startPos === endPos) {
+  if (startPos === endPos && startPos !== undefined && startPos !== null) {
     return (
-      markdownState.slice(0, startPos - 1) +
+      markdownState.slice(0, startPos) +
       thingToInsert +
       markdownState.slice(startPos, markdownState.length)
     );

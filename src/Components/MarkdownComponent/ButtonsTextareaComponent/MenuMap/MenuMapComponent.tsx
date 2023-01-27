@@ -7,7 +7,7 @@ export default function MenuMapComponent(props: IMenuMapProps): JSX.Element {
 
   return (
     <Menu open={isOpen} anchorEl={anchorEl} onClose={HandleClose}>
-      {componentsToMap.map((menu_item, key): JSX.Element => {
+      {componentsToMap?.map((menu_item, key): JSX.Element => {
         return (
           <MenuItem key={key} onClick={menu_item.ClickAction}>
             {menu_item.element}

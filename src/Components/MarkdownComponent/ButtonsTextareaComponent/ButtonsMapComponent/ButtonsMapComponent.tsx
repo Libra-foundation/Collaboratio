@@ -18,7 +18,7 @@ import {
 import MenuMapComponent from "../MenuMap/MenuMapComponent";
 
 export default function ButtonsMapComponent(
-  props: Readonly<IButtonsMapProps>
+  props: IButtonsMapProps
 ): JSX.Element {
   const {
     ClickTitle,

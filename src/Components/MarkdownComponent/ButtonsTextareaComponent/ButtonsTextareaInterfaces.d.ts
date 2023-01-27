@@ -4,7 +4,7 @@ interface IMenuMapProps {
   isOpen: boolean;
   anchorEl: HTMLElement | null;
   HandleClose: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
-  componentsToMap: Array<IElementsToMap>;
+  componentsToMap?: Array<IElementsToMap>;
 }
 
 interface IElementsToMap {
