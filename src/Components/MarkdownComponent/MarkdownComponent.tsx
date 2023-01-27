@@ -121,7 +121,7 @@ export default function MarkdownComponent(
         <Container
           sx={{padding: "2%", height: "auto", zIndex: "0", maxWidth: "100%"}}
         >
-          <ReactMarkdown style={{maxWidth: "100%"}}>
+          <ReactMarkdown className={MarkdownStyle.MarkdownRender}>
             {MARKDOWN_INPUT}
           </ReactMarkdown>
         </Container>
