@@ -1,10 +1,3 @@
-interface IMarkdownTitlesParams {
-  thingToInsert: string;
-  startPos: number | null | undefined;
-  endPos: number | null | undefined;
-  markdownState: string;
-}
-
 export default function MarkdownTitles(
   params: Readonly<IMarkdownTitlesParams>
 ): string | undefined {

@@ -9,9 +9,7 @@ interface IMenuMapProps {
 
 interface IElementsToMap {
   element: JSX.Element | string | undefined;
-  ClickAction: (
-    event: React.MouseEvent<HTMLElement, MouseEvent>
-  ) => undefined | void;
+  ClickAction: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
 interface ITextareaButtonsProps {
