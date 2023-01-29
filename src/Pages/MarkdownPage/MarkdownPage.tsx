@@ -67,7 +67,6 @@ export default function MarkdownPage(): JSX.Element {
             label="Editor only"
             value="Editor only"
           />
-          {}
           {TabRendering()}
           <Tab icon={<ImageIcon />} label="Preview only" value="Preview only" />
         </Tabs>
