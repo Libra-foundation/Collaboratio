@@ -1,7 +1,10 @@
 import React from "react";
 import {ToggleButtonGroup} from "@mui/material";
 import ButtonsMapComponent from "./ButtonsMapComponent/ButtonsMapComponent";
-import {type ITextareaButtonsProps} from "./ButtonsTextareaInterfaces";
+import {
+  IElementsToMap,
+  type ITextareaButtonsProps,
+} from "./ButtonsTextareaInterfaces";
 import MenuMapComponent from "./MenuMap/MenuMapComponent";
 import LooksOneIcon from "@mui/icons-material/LooksOne";
 import LooksTwoIcon from "@mui/icons-material/LooksTwo";
@@ -29,7 +32,7 @@ interface IMenuState {
 export default function TextareaButtonsComponent(
   props: Readonly<ITextareaButtonsProps>
 ): JSX.Element {
-  const {mode, positions, markdownInput} = props;
+  const {mode, positions, markdownInput, SetMarkdownInput} = props;
 
   const [OPEN_AND_ANCHOR, SetOpenAndAnchor] = React.useState<IMenuState>({
     title: {
@@ -82,13 +85,17 @@ export default function TextareaButtonsComponent(
     });
   };
 
-  const MENU_ITEM_TITLES: Array<{
-    element: JSX.Element;
-    ClickAction: () => undefined;
-  }> = [
+  const MENU_ITEM_TITLES: Array<IElementsToMap> = [
     {
       element: <LooksOneIcon />,
-      ClickAction: MarkdownTitles,
+      ClickAction: () =>
+        MarkdownTitles({
+          thingToInsert: "#",
+          startPos: positions?.startPosition,
+          endPos: positions?.endPosition,
+          markdownState: markdownInput,
+          SetMarkdownInput: SetMarkdownInput,
+        }),
     },
     {element: <LooksTwoIcon />, ClickAction: () => undefined},
     {element: <Looks3Icon />, ClickAction: () => undefined},
@@ -116,8 +123,6 @@ export default function TextareaButtonsComponent(
         isOpen={OPEN_AND_ANCHOR.optionsMenu.isOpen}
         anchorEl={OPEN_AND_ANCHOR.optionsMenu.anchorEl}
         HandleClose={HandleClickOptionsMenu}
-        positions={positions}
-        markdownInput={markdownInput}
       />
       <MenuMapComponent
         isOpen={OPEN_AND_ANCHOR.title.isOpen}

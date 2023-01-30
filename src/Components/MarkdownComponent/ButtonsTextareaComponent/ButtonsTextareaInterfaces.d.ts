@@ -9,28 +9,39 @@ interface IMenuMapProps {
 
 interface IElementsToMap {
   element: JSX.Element | string | undefined;
-  ClickAction: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
+  ClickAction: ClickAction;
 }
 
-interface ITextareaButtonsProps {
+interface IMode {
   mode: string;
+}
+
+interface ITextareaButtonsProps extends IMode {
   positions:
     | {startPosition: number | null; endPosition: number | null}
     | undefined;
   markdownInput: string;
+  SetMarkdownInput: () => void;
 }
 
-interface IButtonsMapProps extends IMenuMapProps, ITextareaButtonsProps {
+interface IButtonsMapProps extends IMenuMapProps, IMode {
   ClickTitle: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
   ClickCodeSnippet: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
+type ClickAction1 = () => undefined;
+type ClickAction2 = (
+  event: React.MouseEvent<HTMLElement, MouseEvent>
+) => undefined | void;
+type ClickAction3 = (
+  event: React.MouseEvent<HTMLElement, MouseEvent>
+) => string | undefined;
+type ClickAction = ClickAction1 | ClickAction2 | ClickAction3;
+
 interface IPreviewButton {
   value: string;
   icon: JSX.Element;
-  ClickAction: (
-    event: React.MouseEvent<HTMLElement, MouseEvent>
-  ) => undefined | void;
+  ClickAction: ClickAction;
   isOnSmallScreen: boolean;
   isOnLargeScreen: boolean;
 }

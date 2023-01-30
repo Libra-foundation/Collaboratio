@@ -31,6 +31,12 @@ export default function MarkdownComponent(
     endPosition: number | null;
   }>();
 
+  const HandleChangeMarkdownState = (
+    event: React.ChangeEvent<HTMLTextAreaElement>
+  ): void => {
+    SetMarkdownInput(event.target.value);
+  };
+
   const HandleOnSelect = (
     event: React.SyntheticEvent<HTMLTextAreaElement, Event>
   ): void => {
@@ -110,9 +116,7 @@ export default function MarkdownComponent(
           autoFocus
           className={MarkdownStyle.textarea}
           style={{color: THEME.palette.mode === "dark" ? "white" : "black"}}
-          onChange={(e): void => {
-            SetMarkdownInput(e.target.value);
-          }}
+          onChange={HandleChangeMarkdownState}
         />
       </Paper>
       <Paper variant="outlined" square={false} sx={Size().preview}>

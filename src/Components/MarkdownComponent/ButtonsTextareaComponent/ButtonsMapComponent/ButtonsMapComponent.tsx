@@ -12,7 +12,7 @@ import CodeIcon from "@mui/icons-material/Code";
 import FormatAlignJustifyIcon from "@mui/icons-material/FormatAlignJustify";
 import {
   type IButtonsMapProps,
-  IElementsToMap,
+  type IElementsToMap,
   type IPreviewButton,
 } from "../ButtonsTextareaInterfaces";
 import MenuMapComponent from "../MenuMap/MenuMapComponent";
@@ -20,16 +20,8 @@ import MenuMapComponent from "../MenuMap/MenuMapComponent";
 export default function ButtonsMapComponent(
   props: IButtonsMapProps
 ): JSX.Element {
-  const {
-    ClickTitle,
-    ClickCodeSnippet,
-    mode,
-    isOpen,
-    anchorEl,
-    HandleClose,
-    positions,
-    markdownInput,
-  } = props;
+  const {ClickTitle, ClickCodeSnippet, mode, isOpen, anchorEl, HandleClose} =
+    props;
 
   const IS_SMALL: boolean = useMediaQuery(
     "@media only screen and (max-width: 920px)"
