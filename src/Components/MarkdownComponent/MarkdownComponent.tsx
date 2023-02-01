@@ -43,8 +43,8 @@ export default function MarkdownComponent(
     const TARGET: HTMLTextAreaElement = event.target as HTMLTextAreaElement;
     SetPositions({
       ...POSITIONS,
-      startPosition: TARGET.selectionStart,
-      endPosition: TARGET.selectionEnd,
+      startPosition: TARGET.selectionStart ?? undefined,
+      endPosition: TARGET.selectionEnd ?? undefined,
     });
   };
 
@@ -105,8 +105,8 @@ export default function MarkdownComponent(
       <Paper variant="outlined" square={false} sx={Size().textarea}>
         <TextareaButtonsComponent
           mode={mode}
-          positions={POSITIONS}
-          markdownInput={MARKDOWN_INPUT}
+          positions={POSITIONS ?? undefined}
+          SetMarkdownInput={SetMarkdownInput}
         />
         <Divider />
         <textarea

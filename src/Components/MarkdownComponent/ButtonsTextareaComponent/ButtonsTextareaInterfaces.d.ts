@@ -7,11 +7,6 @@ interface IMenuMapProps {
   componentsToMap?: Array<IElementsToMap>;
 }
 
-interface IElementsToMap {
-  element: JSX.Element | string | undefined;
-  ClickAction: ClickAction;
-}
-
 interface IMode {
   mode: string;
 }
@@ -20,8 +15,7 @@ interface ITextareaButtonsProps extends IMode {
   positions:
     | {startPosition: number | null; endPosition: number | null}
     | undefined;
-  markdownInput: string;
-  SetMarkdownInput: () => void;
+  SetMarkdownInput: React.Dispatch<React.SetStateAction<string>>;
 }
 
 interface IButtonsMapProps extends IMenuMapProps, IMode {
@@ -29,14 +23,13 @@ interface IButtonsMapProps extends IMenuMapProps, IMode {
   ClickCodeSnippet: (event: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
-type ClickAction1 = () => undefined;
-type ClickAction2 = (
-  event: React.MouseEvent<HTMLElement, MouseEvent>
-) => undefined | void;
-type ClickAction3 = (
-  event: React.MouseEvent<HTMLElement, MouseEvent>
-) => string | undefined;
-type ClickAction = ClickAction1 | ClickAction2 | ClickAction3;
+type ClickAction = (args: unknown) => unknown;
+
+interface IElementsToMap {
+  element: JSX.Element | string | undefined;
+  ClickAction: ClickAction;
+  value: string;
+}
 
 interface IPreviewButton {
   value: string;

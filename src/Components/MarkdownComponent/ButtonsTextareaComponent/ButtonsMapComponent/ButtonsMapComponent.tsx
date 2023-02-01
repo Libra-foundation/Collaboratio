@@ -112,6 +112,7 @@ export default function ButtonsMapComponent(
       return {
         element: items.icon,
         ClickAction: items.ClickAction,
+        value: items.value,
       };
     });
   };

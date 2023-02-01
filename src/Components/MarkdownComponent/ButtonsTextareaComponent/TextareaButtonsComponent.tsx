@@ -2,7 +2,7 @@ import React from "react";
 import {ToggleButtonGroup} from "@mui/material";
 import ButtonsMapComponent from "./ButtonsMapComponent/ButtonsMapComponent";
 import {
-  IElementsToMap,
+  type IElementsToMap,
   type ITextareaButtonsProps,
 } from "./ButtonsTextareaInterfaces";
 import MenuMapComponent from "./MenuMap/MenuMapComponent";
@@ -12,7 +12,6 @@ import Looks3Icon from "@mui/icons-material/Looks3";
 import Looks4Icon from "@mui/icons-material/Looks4";
 import Looks5Icon from "@mui/icons-material/Looks5";
 import Looks6Icon from "@mui/icons-material/Looks6";
-import MarkdownTitles from "../../../Scripts/MarkdownTitles";
 
 interface IMenuState {
   title: {
@@ -30,9 +29,50 @@ interface IMenuState {
 }
 
 export default function TextareaButtonsComponent(
-  props: Readonly<ITextareaButtonsProps>
+  props: ITextareaButtonsProps
 ): JSX.Element {
-  const {mode, positions, markdownInput, SetMarkdownInput} = props;
+  const {mode, positions, SetMarkdownInput} = props;
+
+  const InsertTitle = (value: unknown): void => {
+    let level: number;
+    switch (value) {
+      case "Title 1":
+        level = 1;
+        break;
+      case "Title 2":
+        level = 2;
+        break;
+      case "Title 3":
+        level = 3;
+        break;
+      case "Title 4":
+        level = 4;
+        break;
+      case "Title 5":
+        level = 5;
+        break;
+      case "Title 6":
+        level = 6;
+        break;
+      default:
+        console.log("Title level wasn't found");
+    }
+    if (positions !== undefined) {
+      SetMarkdownInput((prev_state) =>
+        prev_state
+          .slice(0, positions.startPosition ?? undefined)
+          .concat("#")
+          .repeat(level)
+          .concat(" ")
+          .concat(
+            prev_state.slice(
+              positions.startPosition ?? undefined,
+              positions.endPosition ?? undefined
+            )
+          )
+      );
+    }
+  };
 
   const [OPEN_AND_ANCHOR, SetOpenAndAnchor] = React.useState<IMenuState>({
     title: {
@@ -88,30 +128,25 @@ export default function TextareaButtonsComponent(
   const MENU_ITEM_TITLES: Array<IElementsToMap> = [
     {
       element: <LooksOneIcon />,
-      ClickAction: () =>
-        MarkdownTitles({
-          thingToInsert: "#",
-          startPos: positions?.startPosition,
-          endPos: positions?.endPosition,
-          markdownState: markdownInput,
-          SetMarkdownInput: SetMarkdownInput,
-        }),
+      ClickAction: InsertTitle,
+      value: "Title 1",
     },
-    {element: <LooksTwoIcon />, ClickAction: () => undefined},
-    {element: <Looks3Icon />, ClickAction: () => undefined},
-    {element: <Looks4Icon />, ClickAction: () => undefined},
-    {element: <Looks5Icon />, ClickAction: () => undefined},
-    {element: <Looks6Icon />, ClickAction: () => undefined},
+    {element: <LooksTwoIcon />, ClickAction: InsertTitle, value: "Title 2"},
+    {element: <Looks3Icon />, ClickAction: InsertTitle, value: "Title 3"},
+    {element: <Looks4Icon />, ClickAction: InsertTitle, value: "Title 4"},
+    {element: <Looks5Icon />, ClickAction: InsertTitle, value: "Title 5"},
+    {element: <Looks6Icon />, ClickAction: InsertTitle, value: "Title 6"},
   ];
-  const MENU_ITEM_CODE_SNIPPET: Array<{
-    element: string;
-    ClickAction: () => undefined;
-  }> = [
-    {element: "Simple block", ClickAction: () => undefined},
-    {element: "Javascript", ClickAction: () => undefined},
-    {element: "Typescript", ClickAction: () => undefined},
-    {element: "JSON", ClickAction: () => undefined},
-    {element: "YAML", ClickAction: () => undefined},
+  const MENU_ITEM_CODE_SNIPPET: Array<IElementsToMap> = [
+    {
+      element: "Simple block",
+      ClickAction: () => undefined,
+      value: "Simple block",
+    },
+    {element: "Javascript", ClickAction: () => undefined, value: "Javascript"},
+    {element: "Typescript", ClickAction: () => undefined, value: "Typescript"},
+    {element: "JSON", ClickAction: () => undefined, value: "JSON"},
+    {element: "YAML", ClickAction: () => undefined, value: "YAML"},
   ];
 
   return (
