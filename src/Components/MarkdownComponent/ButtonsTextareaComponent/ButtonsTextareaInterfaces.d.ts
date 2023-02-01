@@ -16,6 +16,7 @@ interface ITextareaButtonsProps extends IMode {
     | {startPosition: number | null; endPosition: number | null}
     | undefined;
   SetMarkdownInput: React.Dispatch<React.SetStateAction<string>>;
+  markdownState: string;
 }
 
 interface IButtonsMapProps extends IMenuMapProps, IMode {

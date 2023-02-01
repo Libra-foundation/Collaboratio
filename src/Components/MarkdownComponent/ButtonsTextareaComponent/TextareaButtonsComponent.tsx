@@ -31,7 +31,7 @@ interface IMenuState {
 export default function TextareaButtonsComponent(
   props: ITextareaButtonsProps
 ): JSX.Element {
-  const {mode, positions, SetMarkdownInput} = props;
+  const {mode, positions, SetMarkdownInput, markdownState} = props;
 
   const InsertTitle = (value: unknown): void => {
     let level: number;
@@ -55,22 +55,59 @@ export default function TextareaButtonsComponent(
         level = 6;
         break;
       default:
+        level = 0;
         console.log("Title level wasn't found");
     }
-    if (positions !== undefined) {
-      SetMarkdownInput((prev_state) =>
-        prev_state
-          .slice(0, positions.startPosition ?? undefined)
-          .concat("#")
-          .repeat(level)
-          .concat(" ")
-          .concat(
-            prev_state.slice(
-              positions.startPosition ?? undefined,
-              positions.endPosition ?? undefined
-            )
+    if (
+      positions?.startPosition !== null &&
+      positions?.endPosition !== null &&
+      positions !== undefined
+    ) {
+      const INDEXES: Array<number> = [];
+      let a: number = 0;
+      while (markdownState.includes("\n", a)) {
+        const NEXT_INDEX: number = markdownState.indexOf("\n", a);
+        INDEXES.push(NEXT_INDEX);
+        a = NEXT_INDEX + 1;
+      }
+      if (INDEXES.length === 0) {
+        SetMarkdownInput((prev_state) =>
+          (level > 1 ? String("#".repeat(level)) : "# ").concat(
+            prev_state.slice(prev_state.lastIndexOf("#") + 1, prev_state.length)
           )
-      );
+        );
+      } else if (INDEXES.length !== 0) {
+        for (let i: number = 0; i <= INDEXES.length - 1; i++) {
+          if (
+            INDEXES[i] < positions.startPosition &&
+            (INDEXES[i + 1] === undefined
+              ? true
+              : positions.endPosition < INDEXES[i + 1])
+          ) {
+            SetMarkdownInput((prev_state) =>
+              prev_state
+                .slice(0, INDEXES[i] + 1)
+                .concat(level > 1 ? String("#".repeat(level)) : "# ")
+                .concat(
+                  prev_state.slice(
+                    prev_state
+                      .slice(
+                        INDEXES[i],
+                        INDEXES[i + 1] !== undefined
+                          ? INDEXES[i + 1]
+                          : prev_state.length
+                      )
+                      .lastIndexOf("\n") +
+                      INDEXES[i] +
+                      1 +
+                      level,
+                    prev_state.length
+                  )
+                )
+            );
+          }
+        }
+      }
     }
   };
 

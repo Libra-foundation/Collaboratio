@@ -107,6 +107,7 @@ export default function MarkdownComponent(
           mode={mode}
           positions={POSITIONS ?? undefined}
           SetMarkdownInput={SetMarkdownInput}
+          markdownState={MARKDOWN_INPUT}
         />
         <Divider />
         <textarea
