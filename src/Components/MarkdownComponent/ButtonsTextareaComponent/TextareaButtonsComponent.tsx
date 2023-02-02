@@ -72,7 +72,10 @@ export default function TextareaButtonsComponent(
       }
       if (INDEXES.length === 0) {
         SetMarkdownInput((prev_state) =>
-          (level > 1 ? String("#".repeat(level)) : "# ").concat(
+          (prev_state[prev_state.lastIndexOf("#") + 1] === " "
+            ? String("#".repeat(level))
+            : String("#".repeat(level)) + " "
+          ).concat(
             prev_state.slice(prev_state.lastIndexOf("#") + 1, prev_state.length)
           )
         );
@@ -80,31 +83,53 @@ export default function TextareaButtonsComponent(
         for (let i: number = 0; i <= INDEXES.length - 1; i++) {
           if (
             INDEXES[i] < positions.startPosition &&
-            (INDEXES[i + 1] === undefined
+            ((INDEXES[i + 1] as number | undefined) === undefined
               ? true
               : positions.endPosition < INDEXES[i + 1])
           ) {
             SetMarkdownInput((prev_state) =>
               prev_state
                 .slice(0, INDEXES[i] + 1)
-                .concat(level > 1 ? String("#".repeat(level)) : "# ")
+                .concat(
+                  prev_state[
+                    prev_state
+                      .slice(
+                        INDEXES[i],
+                        (INDEXES[i + 1] as number | undefined) !== undefined
+                          ? INDEXES[i + 1]
+                          : prev_state.length
+                      )
+                      .lastIndexOf("#") +
+                      1 +
+                      INDEXES[i]
+                  ] === " "
+                    ? String("#".repeat(level))
+                    : String("#".repeat(level)) + " "
+                )
                 .concat(
                   prev_state.slice(
                     prev_state
                       .slice(
-                        INDEXES[i],
-                        INDEXES[i + 1] !== undefined
+                        INDEXES[i] + 1,
+                        (INDEXES[i + 1] as number | undefined) !== undefined
                           ? INDEXES[i + 1]
-                          : prev_state.length
+                          : prev_state.length - 1
                       )
-                      .lastIndexOf("\n") +
+                      .lastIndexOf("#") +
                       INDEXES[i] +
-                      1 +
-                      level,
+                      2,
                     prev_state.length
                   )
                 )
             );
+          }
+          if (
+            INDEXES[i] < positions.startPosition &&
+            ((INDEXES[i + 1] as number | undefined) === undefined
+              ? true
+              : positions.endPosition > INDEXES[i + 1])
+          ) {
+            console.log("fuck");
           }
         }
       }

@@ -43,8 +43,8 @@ export default function MarkdownComponent(
     const TARGET: HTMLTextAreaElement = event.target as HTMLTextAreaElement;
     SetPositions({
       ...POSITIONS,
-      startPosition: TARGET.selectionStart ?? undefined,
-      endPosition: TARGET.selectionEnd ?? undefined,
+      startPosition: TARGET.selectionStart,
+      endPosition: TARGET.selectionEnd,
     });
   };
 
